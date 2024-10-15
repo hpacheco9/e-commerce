@@ -7,7 +7,11 @@
 </head>
 <body>
 
+<x-header title="HELLO"/>
+
 @yield('content')
+
+<x-footer/>
 
 </body>
 </html>
