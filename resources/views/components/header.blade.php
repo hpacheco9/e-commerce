@@ -6,7 +6,7 @@
 
     #search-bar {
         flex-grow: 1; /* Allow the search bar to expand within its container */
-        height: 60px; /* Larger height */
+        height: 50px; /* Larger height */
         padding: 10px 150px 10px 20px; /* Extra space on the right for the icon */
         border-radius: 30px; /* Rounded edges */
         border: 1px solid #ccc;
@@ -15,9 +15,6 @@
         /* Add box shadow */
 
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-
-
     }
 
     .search-container {
@@ -42,7 +39,9 @@
         border-radius: 50%; /* Round icon */
         color: white;
     }
-
+    .search-icon:hover {
+        cursor: pointer;
+    }
     .container {
         display: flex;
         justify-content: flex-start;
@@ -57,17 +56,23 @@
 
 </style>
 
+<script>
+    function num() {
+        alert('Pesquisando...');
+    }
+</script>
 
 
 <header>
     <div class="container">
-        <img src="/images/medivitta-high-resolution-logo-black.png" alt="Medivitta Logo" id="logo">
+        <img src="/images/medivitta-high-resolution-logo-black.png" alt="Medivitta Logo" id="logo" >
         <div class="search">
             <div class="search-container">
                 <input id="search-bar" type="search" placeholder="Pesquisar">
-                <img src="/images/search-icon.svg" alt="Search" class="search-icon">
+                <img src="/images/search-icon.svg" alt="Search" class="search-icon" onclick="num()">
             </div>
         </div>
     </div>
 </header>
+
 
