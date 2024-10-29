@@ -40,37 +40,37 @@
     .search-icon:hover {
         cursor: pointer;
     }
-    .container {
+    .contentor {
         display: flex;
         justify-content: flex-start;
         align-items: center;
         width: 100%;
         gap: 30%;
+        margin-bottom: 1%; /* Reduced from 4% to make room for the line */
+        margin-top: 1%;
     }
     input[type="search"]::-webkit-search-cancel-button {
         display: none;
     }
 
-
+    /* New styles for the separator */
+    .header-separator {
+        width: 100%;
+        height: 1px;
+        background-color: #E0E0E0; /* Light gray color */
+        margin-bottom: 2%; /* Add some space after the line */
+    }
 </style>
 
-<script>
-    function num() {
-        alert('Pesquisando...');
-    }
-</script>
-
-
 <header>
-    <div class="container">
+    <div class="contentor">
         <img src="/images/medivitta-high-resolution-logo.png" alt="Medivitta Logo" id="logo" >
         <div class="search">
             <div class="search-container">
                 <input id="search-bar" type="search" placeholder="Pesquisar">
-                <img src="/images/search-icon.svg" alt="Search" class="search-icon" onclick="num()">
+                <img src="/images/search-icon.svg" alt="Search" class="search-icon">
             </div>
         </div>
     </div>
+    <div class="header-separator"></div> <!-- Added separator line -->
 </header>
-
-

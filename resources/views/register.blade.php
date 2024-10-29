@@ -74,15 +74,14 @@
             <img src="/images/medivitta-high-resolution-logo.png" alt="Medivitta Logo">
         </div>
         <div class="right-column">
-            <h2>Login</h2>
-            <form method="post" action="/login">
+            <h2>Registar</h2>
+            <form method="post" action="/register">
                 {{csrf_field()}}
                 <input type="email" placeholder="Email">
                 <input type="password" placeholder="Senha">
                 <button type="submit">Entrar</button>
-
             </form>
-            <p id="no-account">Não tens uma conta? <a href="/register">Criar</a></p>
+            <p id="no-account">Já tens uma conta? <a href="/login">Login</a></p>
         </div>
     </div>
 @endsection

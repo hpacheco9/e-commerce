@@ -4,12 +4,23 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 style="color: #149FA8">Medicamentos</h1>
-            </div>
-        </div>
+        @foreach ($medicamentos as $medicamento)
+            <x-medicine-card :medicamento="$medicamento" />
+        @endforeach
+
     </div>
 
-    <x-medicine-card />
 @endsection
+
+<style>
+    .container {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 40px; /* Reduced from 50px */
+        padding: 20px; /* Increased from 2px to give some breathing room */
+
+        margin: 0 auto; /* Center the container */
+    }
+
+
+</style>
