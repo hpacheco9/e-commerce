@@ -76,7 +76,7 @@
         transition: 0.5s;
     }
     .social-icon__link:hover {
-        transform: translateY(-10px);
+        transform: translateY(-5px);
     }
 
     .menu__link {
