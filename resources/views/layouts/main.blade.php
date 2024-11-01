@@ -7,7 +7,7 @@
 
 
 </head>
-<body>
+<body style="overflow: hidden">
 
 <x-header title="HELLO"/>
 
