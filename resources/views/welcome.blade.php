@@ -16,10 +16,10 @@
     .container {
         display: grid;
         grid-template-columns: repeat(6, 1fr);
-        gap: 40px; /* Reduced from 50px */
-        padding: 20px; /* Increased from 2px to give some breathing room */
+        gap: 40px;
+        padding: 20px;
 
-        margin: 0 auto; /* Center the container */
+        margin: 0 auto;
     }
 
 

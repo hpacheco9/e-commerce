@@ -46,19 +46,19 @@
         align-items: center;
         width: 100%;
         gap: 30%;
-        margin-bottom: 1%; /* Reduced from 4% to make room for the line */
+        margin-bottom: 1%;
         margin-top: 1%;
     }
     input[type="search"]::-webkit-search-cancel-button {
         display: none;
     }
 
-    /* New styles for the separator */
+
     .header-separator {
         width: 100%;
         height: 1px;
-        background-color: #E0E0E0; /* Light gray color */
-        margin-bottom: 2%; /* Add some space after the line */
+        background-color: #E0E0E0;
+        margin-bottom: 2%;
     }
 </style>
 
@@ -72,5 +72,5 @@
             </div>
         </div>
     </div>
-    <div class="header-separator"></div> <!-- Added separator line -->
+    <div class="header-separator"></div>
 </header>
