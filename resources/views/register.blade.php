@@ -28,6 +28,7 @@
         justify-content: center;
         align-items: center;
         padding: 2rem;
+        margin-bottom: 10%;
     }
 
     .right-column h2 {
@@ -39,8 +40,8 @@
     }
 
     .right-column input, .right-column button {
-        width: 100%;
-        height: 30%;
+        width: 90%;
+        height: 10%;
         margin-bottom: 1rem;
         padding: 0.75rem 1rem;
         border-radius: 0.25rem;
@@ -69,7 +70,6 @@
 @section('content')
 
     <div class="container">
-
         <div class="left-column">
             <img src="/images/medivitta-high-resolution-logo.png" alt="Medivitta Logo">
         </div>
@@ -77,11 +77,18 @@
             <h2>Registar</h2>
             <form method="post" action="/register">
                 {{csrf_field()}}
+                <input type="text" placeholder="Nome">
                 <input type="email" placeholder="Email">
-                <input type="password" placeholder="Senha">
-                <button type="submit">Entrar</button>
+                <input type="password" placeholder="Palavra-passe">
+                <input type="password" placeholder="Repita a palavra-passe">
+                <input type="number" placeholder="Número de identificação fiscal">
+                <input type="text" placeholder="Rua">
+                <input type="text" placeholder="Zip Code" title="Please enter a Zip Code" pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$">
+
+                <input type="text" placeholder="Porta">
+                <button type="submit">Registar</button>
+                <p id="no-account">Já tens uma conta? <a href="/login">Login</a></p>
             </form>
-            <p id="no-account">Já tens uma conta? <a href="/login">Login</a></p>
         </div>
     </div>
 @endsection
