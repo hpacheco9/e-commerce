@@ -7,6 +7,7 @@
                 class="card-image"
             >
         </div>
+    </a>
         <div class="card-content-wrapper">
             <div class="card-content">
                 <div class="carta-head">
@@ -14,6 +15,7 @@
                 </div>
                 <p class="description-text">{{ $medicamento->descricao }}</p>
             </div>
+
             <div class="card-footer">
                 <div class="card-price">
                     <span class="price-amount">€ {{ $medicamento->preco }}</span>
@@ -35,7 +37,7 @@
                 </button>
             </div>
         </div>
-    </a>
+
 </div>
 
 
