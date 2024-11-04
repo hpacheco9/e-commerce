@@ -77,8 +77,8 @@
             <h2>Login</h2>
             <form method="post" action="/login">
                 {{csrf_field()}}
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Senha">
+                <input type="email" name="email"  placeholder="Email" >
+                <input type="password" name="password" placeholder="Senha">
                 <button type="submit">Entrar</button>
 
             </form>

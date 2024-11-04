@@ -3,11 +3,13 @@
 @section('title', 'Test page')
 
 @section('content')
+
     <div class="container">
         @foreach ($medicamentos as $medicamento)
             <x-medicine-card :medicamento="$medicamento" />
         @endforeach
     </div>
+
 @endsection
 
 <style>

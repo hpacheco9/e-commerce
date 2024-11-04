@@ -20,15 +20,25 @@ class UserController extends Controller
         }
     }
 
-    public function register(Request $request){
+    public function register(Request $request) {
         $incoming = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required'
-
+            'password' => 'required|min:8',
+            'nif' => 'required|digits:9',
+            'rua' => 'required|string',
+            'codigoPostal' => 'required|string',
+            'porta' => 'required|string'
         ]);
-        $incoming['password'] = Hash::make($incoming['password']);
-        User::create($incoming);
-        return redirect("/login");
+
+        try {
+            $incoming['password'] = Hash::make($incoming['password']);
+            User::create($incoming);
+            return redirect("/login")->with('success', 'Account created successfully');
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'error' => 'Registration failed. Please try again.'
+            ])->withInput($request->except('password'));
+        }
     }
 }

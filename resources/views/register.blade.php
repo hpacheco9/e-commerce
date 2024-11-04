@@ -8,8 +8,8 @@
         grid-template-columns: 1fr 1fr;
         height: 100vh;
         background-color: #ffffff;
-        color: #fff;
         font-family: Arial, sans-serif;
+        color: #333;
     }
 
     .left-column {
@@ -28,43 +28,83 @@
         justify-content: center;
         align-items: center;
         padding: 2rem;
+        max-width: 400px; /* Center and constrain width */
+        margin: auto; /* Center align the form */
     }
 
     .right-column h2 {
         font-size: 2rem;
         margin-bottom: 1.5rem;
-        color: black;
-        display: flex;
-        justify-content: center;
+        color: #149FA8;
     }
 
-    .right-column input, .right-column button {
+    /* General styling for inputs and buttons */
+    .right-column input,
+    .right-column button {
         width: 100%;
-        height: 30%;
         margin-bottom: 1rem;
-        padding: 0.75rem 1rem;
-        border-radius: 0.25rem;
+        padding: 0.75rem;
         border: none;
         font-size: 1rem;
     }
 
+    /* Full-width inputs with max-width */
+    .full-width {
+        max-width: 100%; /* Aligns with the form width */
+    }
 
+    /* Specific styling for Código Postal and Porta */
+    .short-inputs {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .short {
+        flex: 1;
+        padding: 0.75rem;
+        border-radius: 0.25rem;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+    }
+
+    /* Button styling */
     button[type="submit"] {
         background-color: #149FA8;
         color: white;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%; /* Aligns with the form width */
     }
 
     button[type="submit"]:hover {
         background-color: #0f7d86;
-        cursor: pointer;
     }
 
+    /* Additional text styling */
     #no-account {
         font-size: 1rem;
         color: #808080;
+        margin-top: 1rem;
+        text-align: center;
     }
 
+    #no-account a {
+        color: #149FA8;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    #no-account a:hover {
+        text-decoration: underline;
+    }
 </style>
+
+
+
 
 @section('content')
 
@@ -76,11 +116,20 @@
         <div class="right-column">
             <h2>Registar</h2>
             <form method="post" action="/register">
-                {{csrf_field()}}
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Senha">
-                <button type="submit">Entrar</button>
+                {{ csrf_field() }}
+                <input type="text" placeholder="Nome" name="name" class="full-width">
+                <input type="email" placeholder="Email" name="email" class="full-width">
+                <input type="password" placeholder="Senha" name="password" class="full-width">
+                <input type="number" pattern="\d{9}" placeholder="NIF" name="nif" class="full-width" maxlength="9">
+                <input type="text" placeholder="Rua" name="rua" class="full-width">
+                <div class="short-inputs">
+                    <input type="text" placeholder="Código Postal" name="codigoPostal" class="short" pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$">
+                    <input type="text" placeholder="Porta" name="porta" class="short">
+                </div>
+                <button type="submit">Criar</button>
             </form>
+
+
             <p id="no-account">Já tens uma conta? <a href="/login">Login</a></p>
         </div>
     </div>
