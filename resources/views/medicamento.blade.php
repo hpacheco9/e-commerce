@@ -12,15 +12,14 @@
             <p>{{$medicamento->descricao}}</p>
         </div>
     </div>
+
+
 @endsection
 
 
 <style>
-
     .medicamento-descricao {
         font-size: 1.5rem;
         margin-top: 2rem;
     }
-
-
 </style>

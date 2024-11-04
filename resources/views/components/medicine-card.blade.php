@@ -7,49 +7,61 @@
                 class="card-image"
             >
         </div>
-        <div class="card-content">
-            <div class="carta-head">
-                <h3 class="card-title">{{ $medicamento->nome }}</h3>
-            </div>
-            <div class="card-description">
+        <div class="card-content-wrapper">
+            <div class="card-content">
+                <div class="carta-head">
+                    <h3 class="card-title">{{ $medicamento->nome }}</h3>
+                </div>
                 <p class="description-text">{{ $medicamento->descricao }}</p>
+            </div>
+            <div class="card-footer">
                 <div class="card-price">
                     <span class="price-amount">€ {{ $medicamento->preco }}</span>
                     <span class="price-unit">/ unidade</span>
+
+                    @if ($medicamento->quantidade <= 0)
+                        <span class="price-unit
+                            out-of-stock">Esgotado</span>
+                    @else
+                        <span class="price-unit
+                            in-stock">Em stock</span>
+                    @endif
+
+
                 </div>
+
+                <button class="add-button" aria-label="Adicionar {{ $medicamento->nome }} aos favoritos">
+                    Adicionar ao carrinho
+                </button>
             </div>
         </div>
     </a>
-
-    <button class="add-button" aria-label="Adicionar {{ $medicamento->nome }} aos favoritos">
-        Adicionar ao carrinho
-    </button>
 </div>
+
 
 <style>
     .card {
         width: 288px;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         background: white;
         font-family: 'Arial', sans-serif;
         transition: transform 0.2s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
-    .card-image-container {
-        width: 100%;
-        height: 192px;
-    }
-
-    .card-image {
-        width: 100%;
+    .card-content-wrapper {
+        display: flex;
+        flex-direction: column;
         height: 100%;
-        object-fit: cover;
     }
 
     .card-content {
         padding: 16px;
+        flex-grow: 1; /* Allows the content to grow and push the button down */
     }
 
     .carta-head {
@@ -73,6 +85,9 @@
     .card-price {
         display: flex;
         align-items: baseline;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        margin-top: -10px;
         gap: 4px;
     }
 
@@ -97,6 +112,7 @@
         font-weight: 600;
         cursor: pointer;
         transition: background-color 0.2s ease;
+        margin-top: auto;
     }
 
     .add-button:hover {
@@ -110,9 +126,25 @@
 
     #medicamento-link {
         text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
     }
 
     #medicamento-link:hover {
         cursor: pointer;
     }
+
+    .price-unit.out-of-stock {
+        color: #FF0000;
+        margin-left: 29.99%;;
+    }
+
+
+
+    .price-unit.in-stock {
+        color: #00FF00;
+        margin-left: 29.99%;
+    }
+
 </style>

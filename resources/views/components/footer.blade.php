@@ -108,7 +108,7 @@
         left: 0;
         width: 100%;
         height: 50px;
-        background: url("images/wave.png");
+        background: url("/images/wave.png");
         background-size: 1000px 50px;
     }
 
