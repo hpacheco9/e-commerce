@@ -1,23 +1,26 @@
 <div class="card">
-    <div class="card-image-container">
-        <img
-            src="/images/{{ $medicamento->imagem }}"
-            alt="Imagem do medicamento"
-            class="card-image"
-        >
-    </div>
-    <div class="card-content">
-        <div class="carta-head">
-            <h3 class="card-title">{{ $medicamento->nome }}</h3>
+    <a id="medicamento-link" href="medicamentos/{{$medicamento->referencia}}">
+        <div class="card-image-container">
+            <img
+                src="/images/{{ $medicamento->imagem }}"
+                alt="Imagem do medicamento"
+                class="card-image"
+            >
         </div>
-        <div class="card-description">
-            <p class="description-text">{{ $medicamento->descricao }}</p>
-            <div class="card-price">
-                <span class="price-amount">€ {{ $medicamento->preco }}</span>
-                <span class="price-unit">/ unidade</span>
+        <div class="card-content">
+            <div class="carta-head">
+                <h3 class="card-title">{{ $medicamento->nome }}</h3>
+            </div>
+            <div class="card-description">
+                <p class="description-text">{{ $medicamento->descricao }}</p>
+                <div class="card-price">
+                    <span class="price-amount">€ {{ $medicamento->preco }}</span>
+                    <span class="price-unit">/ unidade</span>
+                </div>
             </div>
         </div>
-    </div>
+    </a>
+
     <button class="add-button" aria-label="Adicionar {{ $medicamento->nome }} aos favoritos">
         Adicionar ao carrinho
     </button>
@@ -103,5 +106,13 @@
     .add-button:focus {
         outline: none;
         background: #0F767E;
+    }
+
+    #medicamento-link {
+        text-decoration: none;
+    }
+
+    #medicamento-link:hover {
+        cursor: pointer;
     }
 </style>

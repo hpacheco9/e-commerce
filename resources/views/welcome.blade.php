@@ -7,10 +7,8 @@
 
 
         @foreach ($medicamentos as $medicamento)
-            <a id="medicamento-link" href="medicamentos/{{$medicamento->referencia}}">
 
             <x-medicine-card :medicamento="$medicamento" />
-            </a>
         @endforeach
 
 
@@ -25,13 +23,5 @@
         gap: 40px;
         padding: 20px;
         margin: 0 auto;
-    }
-
-    #medicamento-link {
-        text-decoration: none;
-    }
-
-    #medicamento-link:hover {
-        cursor: pointer;
     }
 </style>
