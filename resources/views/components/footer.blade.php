@@ -41,7 +41,7 @@
         padding: 0;
     }
     .footer {
-        position: absolute;
+        position: relative;
         bottom: 0;
         height: 4rem;
         width: 100%;
@@ -52,7 +52,9 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        margin-top: 10%;
     }
+
 
     .social-icon,
     .menu {

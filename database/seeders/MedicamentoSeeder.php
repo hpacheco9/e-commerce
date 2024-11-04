@@ -65,6 +65,84 @@ class MedicamentoSeeder extends Seeder
                 'industria' => 'Medley',
                 'created_at' => now(),
                 'updated_at' => now()
+            ],
+            [
+                'referencia' => 1005,
+                'nome' => 'Ibuprofeno',
+                'preco' => 18.75,
+                'descricao' => 'Anti-inflamatório não esteroidal',
+                'forma' => 'Comprimido',
+                'dosagem' => '600mg',
+                'imagem' => 'medicine-placeholder.svg',
+                'quantidade' => 90,
+                'industria' => 'Eurofarma',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'referencia' => 1006,
+                'nome' => 'Loratadina',
+                'preco' => 22.90,
+                'descricao' => 'Antialérgico de uso oral',
+                'forma' => 'Comprimido',
+                'dosagem' => '10mg',
+                'imagem' => 'medicine-placeholder.svg',
+                'quantidade' => 75,
+                'industria' => 'Neo Química',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'referencia' => 1007,
+                'nome' => 'Dexametasona',
+                'preco' => 32.60,
+                'descricao' => 'Corticosteroide para inflamações',
+                'forma' => 'Creme',
+                'dosagem' => '1mg/g',
+                'imagem' => 'medicine-placeholder.svg',
+                'quantidade' => 60,
+                'industria' => 'EMS',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'referencia' => 1008,
+                'nome' => 'Metformina',
+                'preco' => 28.90,
+                'descricao' => 'Medicamento para diabetes tipo 2',
+                'forma' => 'Comprimido',
+                'dosagem' => '850mg',
+                'imagem' => 'medicine-placeholder.svg',
+                'quantidade' => 110,
+                'industria' => 'Medley',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'referencia' => 1009,
+                'nome' => 'Sertralina',
+                'preco' => 55.75,
+                'descricao' => 'Antidepressivo da classe ISRS',
+                'forma' => 'Comprimido',
+                'dosagem' => '50mg',
+                'imagem' => 'medicine-placeholder.svg',
+                'quantidade' => 40,
+                'industria' => 'Eurofarma',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'referencia' => 1010,
+                'nome' => 'Atenolol',
+                'preco' => 19.90,
+                'descricao' => 'Beta-bloqueador para hipertensão',
+                'forma' => 'Comprimido',
+                'dosagem' => '25mg',
+                'imagem' => 'medicine-placeholder.svg',
+                'quantidade' => 95,
+                'industria' => 'Neo Química',
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         ]);
     }

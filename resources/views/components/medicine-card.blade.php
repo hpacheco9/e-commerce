@@ -51,6 +51,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        margin-bottom: 5%;
     }
 
     .card-content-wrapper {
@@ -62,6 +63,8 @@
     .card-content {
         padding: 16px;
         flex-grow: 1; /* Allows the content to grow and push the button down */
+        height: 80px;
+
     }
 
     .carta-head {
