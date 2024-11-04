@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('compras', function (Blueprint $table) {
-            $table->id();
-            $table->float('total', 2);
-            $table->date('data');
-            $table->string('user_email', 255);
+        Schema::create('carrinhos', function (Blueprint $table) {
+            $table->string('user_email', 255)->primary();
             $table->foreign('user_email')
                 ->references('email')
                 ->on('users')
                 ->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('compras');
+        Schema::dropIfExists('carrinhos');
     }
 };
