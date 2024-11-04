@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-image-container">
         <img
-            src="/images/{{ $medicamento->image }}"
+            src="/images/{{ $medicamento->imagem }}"
             alt="Imagem do medicamento"
             class="card-image"
         >

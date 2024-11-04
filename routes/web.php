@@ -15,6 +15,8 @@ Route::get('register', function () {
 });
 
 
+Route::get('medicamentos/{referencia}', [MedicamentoController::class, 'show']);
+
 Route::post('login', [UserController::class, 'login']);
 
 

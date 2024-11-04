@@ -6,6 +6,7 @@
     <title>@yield('title')</title>
 
 
+
 </head>
 <body style="overflow: hidden">
 

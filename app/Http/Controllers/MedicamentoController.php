@@ -19,4 +19,10 @@ class MedicamentoController extends Controller
             }
         return view('welcome', ['medicamentos' => $medicamentos]);
     }
+
+    public function show($referencia)
+    {
+        $medicamento = Medicamento::where('referencia', $referencia)->firstOrFail();
+        return view('medicamento', ['medicamento' => $medicamento]);
+    }
 }
