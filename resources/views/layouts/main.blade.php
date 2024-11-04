@@ -22,26 +22,7 @@
 </html>
 
 <style>
-
     ::-webkit-scrollbar {
-        width: 12px;
+        display: none;
     }
-
-    ::-webkit-scrollbar-track {
-        background: transparent;
-        border: 10px;
-
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: #35A1A8;
-        border-radius: 10px;
-        border: 3px solid #f0f0f0;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background-color: #118891;
-        cursor: pointer;
-    }
-
 </style>
