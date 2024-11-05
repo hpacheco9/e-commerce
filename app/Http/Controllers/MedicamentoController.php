@@ -7,18 +7,35 @@ use Illuminate\Http\Request;
 
 class MedicamentoController extends Controller
 {
-    public function index()
+    public function index(Request $request, $limit = 10)
     {
-       $search = request('search');
-       if ($search) {
-              $medicamentos = Medicamento::where([
-                ['nome', 'like', '%' . $search . '%']
-              ])->get();
-         } else {
-              $medicamentos = Medicamento::all();
-            }
-        return view('welcome', ['medicamentos' => $medicamentos]);
+        $page = $request->input('page', 1);
+        $offset = ($page - 1) * $limit;
+        $search = $request->input('search');
+
+        if ($search) {
+            $medicamentos = Medicamento::where('nome', 'like', '%' . $search . '%')
+                ->skip($offset)
+                ->take($limit)
+                ->get();
+            $totalMedicamentos = Medicamento::where('nome', 'like', '%' . $search . '%')->count();
+        } else {
+            $medicamentos = Medicamento::skip($offset)
+                ->take($limit)
+                ->get();
+            $totalMedicamentos = Medicamento::count();
+        }
+
+        $hasMore = ($offset + $limit) < $totalMedicamentos;
+
+        return view('welcome', [
+            'medicamentos' => $medicamentos,
+            'page' => $page,
+            'hasMore' => $hasMore,
+            'search' => $search,
+        ]);
     }
+
 
     public function show($referencia)
     {

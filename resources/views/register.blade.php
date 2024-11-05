@@ -1,6 +1,6 @@
 @extends('layouts.blank')
 
-@section('title', 'login')
+@section('title', 'register')
 
 <style>
     .container {
