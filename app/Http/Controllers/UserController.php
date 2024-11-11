@@ -15,8 +15,12 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+        $user = User::where('email', $credentials['email'])->first();
         if (auth()->attempt($credentials)){
             $request->session()->regenerate();
+            if ($user->isAdmin == 1) {
+                return redirect("/medicamentos/1001"); // Quando criado dar redirect para "dashboard"
+            }
             return redirect("/");
         }
     }
