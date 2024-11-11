@@ -236,28 +236,31 @@
 
     .alerta {
         position: fixed;
-        bottom: 2rem;
-        right: 2rem;
+        top: 2rem; /* Position it near the top */
+        right: 2rem; /* Position it near the right */
+        transform: translateY(-100%); /* Start hidden above */
+        max-width: 300px;
+        width: 90%; /* Responsive width */
         background-color: #e3f5f7;
         color: #149FA8;
         padding: 1rem 2rem;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transform: translateY(100%); /* Changed from 200% */
         transition: transform 0.3s ease-out, opacity 0.3s ease;
         opacity: 0;
+        z-index: 1000; /* Ensure it appears above other elements */
     }
 
     .alerta.show {
-        transform: translateY(0); /* Reduced translateY for less movement */
+        transform: translateY(0); /* Slide down slightly into view */
         opacity: 1;
     }
 
-    /* Make the alert smaller on mobile devices */
+    /* Smaller font size and padding for mobile screens */
     @media (max-width: 600px) {
         .alerta {
-            bottom: 1rem;
-            right: 1rem;
+            top: 1rem; /* Reduce top space for mobile */
+            right: 1rem; /* Reduce right space for mobile */
             padding: 0.8rem 1.5rem;
             font-size: 0.875rem;
         }
