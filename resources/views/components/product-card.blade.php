@@ -37,7 +37,8 @@
                 </div>
                 <div class="seletor-quantidade">
                     <button id="decremento" class="botao-quantidade" onclick="alterarQuantidade(-1)">-</button>
-                    <input type="number" class="input-quantidade" id="quantidade" value="1" min="1" readonly>
+                    <input type="number" class="input-quantidade" id="quantidade" value="1" min="1" readonly inputmode="numeric">
+
                     <button class="botao-quantidade" onclick="alterarQuantidade(1)">+</button>
                 </div>
                 <button class="botao-comprar" onclick="comprarProduto()">Comprar agora</button>
@@ -130,6 +131,16 @@
         justify-content: space-between;
         align-items: flex-start;
         margin-bottom: 1rem;
+    }
+
+    .input-quantidade::-webkit-outer-spin-button,
+    .input-quantidade::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .input-quantidade {
+        -moz-appearance: textfield; /* Hides controls in Firefox */
     }
 
     .titulo-produto {
@@ -232,14 +243,26 @@
         padding: 1rem 2rem;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transform: translateY(200%);
-        transition: transform 0.3s ease-out;
+        transform: translateY(100%); /* Changed from 200% */
+        transition: transform 0.3s ease-out, opacity 0.3s ease;
         opacity: 0;
     }
 
     .alerta.show {
-        transform: translateY(-200px);
+        transform: translateY(0); /* Reduced translateY for less movement */
         opacity: 1;
-
     }
+
+    /* Make the alert smaller on mobile devices */
+    @media (max-width: 600px) {
+        .alerta {
+            bottom: 1rem;
+            right: 1rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.875rem;
+        }
+    }
+
+
+
 </style>
