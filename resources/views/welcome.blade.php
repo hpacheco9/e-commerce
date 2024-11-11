@@ -10,12 +10,23 @@
     </div>
 
     <div class="pagination-controls">
+        <!-- Previous Button -->
         @if($page > 1)
-        <a class="button" href="?page={{ $page - 1 }}">Anterior</a>
+            <a class="button" href="?page={{ $page - 1 }}&search={{ $search }}">Anterior</a>
         @endif
 
+        <!-- Page Number Links -->
+        @for($i = 1; $i <= $totalPages; $i++)
+            @if($i == $page)
+                <span class="button active">{{ $i }}</span> <!-- Active page -->
+            @else
+                <a class="button" href="?page={{ $i }}&search={{ $search }}">{{ $i }}</a>
+            @endif
+        @endfor
+
+        <!-- Next Button -->
         @if($hasMore)
-        <a class="button" href="?page={{ $page + 1 }}">Avançar</a>
+            <a class="button" href="?page={{ $page + 1 }}&search={{ $search }}">Avançar</a>
         @endif
     </div>
 @endsection
