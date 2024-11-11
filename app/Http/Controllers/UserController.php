@@ -19,7 +19,7 @@ class UserController extends Controller
         if (auth()->attempt($credentials)){
             $request->session()->regenerate();
             if ($user->isAdmin == 1) {
-                return redirect("/medicamentos/1001"); // Quando criado dar redirect para "dashboard"
+                return redirect("dashboard")->with('adminName', $user->name);
             }
             return redirect("/");
         }
