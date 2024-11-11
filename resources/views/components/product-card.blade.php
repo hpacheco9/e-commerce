@@ -14,7 +14,7 @@
                 <div class="produto-cabecalho">
                     <div>
                         <h1 class="titulo-produto">{{ $medicamento->nome }}</h1>
-                        <div class="preco">€{{ number_format($medicamento->preco, 2, ',', '.') }}</div>
+                        <div class="preco">€ {{ number_format($medicamento->preco, 2, ',', '.') }}</div>
                     </div>
                     <span class="etiqueta-stock">Em stock</span>
                 </div>
