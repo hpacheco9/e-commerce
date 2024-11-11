@@ -31,8 +31,6 @@
     </div>
 @endsection
 
-
-
 <style>
     .container {
         display: grid;
@@ -62,14 +60,12 @@
         font-size: 1em;
         padding: 0.75em 1em;
         color: rgb(53, 161, 168);
-        border: 0.15em solid rgb(53, 161, 168);
-        border-radius: 1.25em;
         transition: 4s;
-        margin: 0; /* Set margin to 0 to remove gaps */
+        margin: 0;
         position: relative;
     }
 
-    /* The rest of your styles remain unchanged */
+
     .button::before,
     .button::after {
         content: '';
