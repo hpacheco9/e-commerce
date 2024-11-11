@@ -14,24 +14,29 @@ class MedicamentoController extends Controller
         $search = $request->input('search');
 
         if ($search) {
+            // Filtered search results
             $medicamentos = Medicamento::where('nome', 'like', '%' . $search . '%')
                 ->skip($offset)
                 ->take($limit)
                 ->get();
             $totalMedicamentos = Medicamento::where('nome', 'like', '%' . $search . '%')->count();
         } else {
+            // Unfiltered results
             $medicamentos = Medicamento::skip($offset)
                 ->take($limit)
                 ->get();
             $totalMedicamentos = Medicamento::count();
         }
 
-        $hasMore = ($offset + $limit) < $totalMedicamentos;
+        // Calculate total pages
+        $totalPages = ceil($totalMedicamentos / $limit);
+        $hasMore = ($page < $totalPages);
 
         return view('welcome', [
             'medicamentos' => $medicamentos,
             'page' => $page,
             'hasMore' => $hasMore,
+            'totalPages' => $totalPages,
             'search' => $search,
         ]);
     }

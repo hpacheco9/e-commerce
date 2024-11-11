@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 <div class="card">
     <a id="medicamento-link" href="medicamentos/{{$medicamento->referencia}}">
         <div class="card-image-container">
@@ -32,8 +33,16 @@
 
                 </div>
 
-                <button class="add-button" aria-label="Adicionar {{ $medicamento->nome }} aos favoritos">
-                    Adicionar ao carrinho
+                <button class="add-button"
+                        aria-label="Adicionar {{ $medicamento->nome }} aos favoritos"
+                        onclick="<?php
+            if (Auth::check()) {
+                echo "addToCart(" . $medicamento->id . ")";
+            } else {
+                echo "window.location.href = '/login'";
+            }
+        ?>">
+                    Adicionar aos Favoritos
                 </button>
             </div>
         </div>

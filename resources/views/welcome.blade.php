@@ -11,13 +11,22 @@
 
     <div class="pagination-controls">
         @if($page > 1)
-        <a class="button" href="?page={{ $page - 1 }}">Anterior</a>
+            <a class="button" href="?page={{ $page - 1 }}">{{"< Anterior"}}</a>
         @endif
 
+        @for($i = 1; $i <= $totalPages; $i++)
+            @if($i == $page)
+                <span class="button active">{{ $i }}</span>
+            @else
+                <a class="button" href="?page={{ $i }}">{{ $i }}</a>
+            @endif
+        @endfor
+
         @if($hasMore)
-        <a class="button" href="?page={{ $page + 1 }}">Avançar</a>
+            <a class="button" href="?page={{ $page + 1 }}">{{ "Avançar >" }}</a>
         @endif
     </div>
+
 @endsection
 
 
@@ -34,10 +43,10 @@
     }
 
     .pagination-controls {
+        margin-top: 5%;
         display: flex;
-        justify-content: center; /* Center the buttons without gaps */
-        align-items: center; /* Vertically align buttons */
-        margin-top: 20px; /* Space above the buttons */
+        justify-content: center;
+        align-items: center;
         gap: 10px;
     }
 
@@ -51,8 +60,6 @@
         font-size: 1em;
         padding: 0.75em 1em;
         color: rgb(53, 161, 168);
-        border: 0.15em solid rgb(53, 161, 168);
-        border-radius: 1.25em;
         transition: 4s;
         margin: 0; /* Set margin to 0 to remove gaps */
         position: relative;
@@ -87,6 +94,7 @@
         color: white;
         cursor: pointer;
     }
+
 
     .button:hover::before,
     .button:hover::after,
