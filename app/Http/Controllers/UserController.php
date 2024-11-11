@@ -23,29 +23,40 @@ class UserController extends Controller
             }
             return redirect("/");
         }
+
+        return back()->withErrors([
+            'email' => 'Email ou password incorretos',
+            'password' => 'Email ou password incorretos',
+        ]);
     }
 
     public function register(Request $request) {
         $incoming = $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
             'nif' => 'required|digits:9',
             'rua' => 'required|string',
             'codigoPostal' => 'required|string',
             'porta' => 'required|string'
+        ], [
+            'email.unique' => 'Este email já está a ser utilizado.',
+            'password.min' => 'A password deve ter pelo menos 8 caracteres.',
         ]);
 
         try {
+
             $incoming['password'] = Hash::make($incoming['password']);
             User::create($incoming);
             return redirect("/login")->with('success', 'Account created successfully');
         } catch (\Exception $e) {
+
             return back()->withErrors([
                 'error' => 'Registration failed. Please try again.'
             ])->withInput($request->except('password'));
         }
     }
+
 
     public function logout(Request $request)
     {

@@ -1,136 +1,234 @@
-@extends('layouts.blank')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-@section('title', 'register')
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.5;
+        }
+        .error-message {
+            color: #ff3333;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100vh;
+        }
 
-<style>
-    .container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        height: 100vh;
-        background-color: #ffffff;
-        font-family: Arial, sans-serif;
-        color: #333;
-    }
+        .left-column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .left-column {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .left-column img {
+            max-width: 70%;
+            height: auto;
+        }
 
-    .left-column img {
-        max-width: 70%;
-    }
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
 
-    .right-column {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem;
-        max-width: 400px; /* Center and constrain width */
-        margin: auto; /* Center align the form */
-    }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
-    .right-column h2 {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-        color: #149FA8;
-    }
+        .right-column h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #149FA8;
+            text-align: center;
+            font-weight: 600;
+        }
 
-    /* General styling for inputs and buttons */
-    .right-column input,
-    .right-column button {
-        width: 100%;
-        margin-bottom: 1rem;
-        padding: 0.75rem;
-        border: none;
-        font-size: 1rem;
-    }
+        form {
+            width: 100%;
+            max-width: 400px;
+        }
 
-    /* Full-width inputs with max-width */
-    .full-width {
-        max-width: 100%; /* Aligns with the form width */
-    }
+        .input-group {
+            margin-bottom: 1.25rem;
+        }
 
-    /* Specific styling for Código Postal and Porta */
-    .short-inputs {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-        width: 100%;
-    }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+            color: #4b5563;
+            font-weight: 500;
+        }
 
-    .short {
-        flex: 1;
-        padding: 0.75rem;
-        border-radius: 0.25rem;
-        border: 1px solid #ddd;
-        font-size: 1rem;
-    }
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            font-family: 'Inter', sans-serif;
+        }
 
-    /* Button styling */
-    button[type="submit"] {
-        background-color: #149FA8;
-        color: white;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        width: 100%; /* Aligns with the form width */
-    }
+        .input-group input:focus {
+            outline: none;
+            border-color: #149FA8;
+            box-shadow: 0 0 0 3px rgba(20, 159, 168, 0.1);
+        }
 
-    button[type="submit"]:hover {
-        background-color: #0f7d86;
-    }
+        .short-inputs {
+            display: flex;
+            gap: 1rem;
+        }
 
-    /* Additional text styling */
-    #no-account {
-        font-size: 1rem;
-        color: #808080;
-        margin-top: 1rem;
-        text-align: center;
-    }
+        .short-inputs .input-group {
+            flex: 1;
+        }
 
-    #no-account a {
-        color: #149FA8;
-        font-weight: bold;
-        text-decoration: none;
-    }
+        button[type="submit"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: #149FA8;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.15s ease-in-out;
+            font-family: 'Inter', sans-serif;
+        }
 
-    #no-account a:hover {
-        text-decoration: underline;
-    }
-</style>
+        button[type="submit"]:hover {
+            background-color: #0f7d86;
+        }
 
+        #have-account {
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: #4b5563;
+            text-align: center;
+        }
 
+        #have-account a {
+            color: #149FA8;
+            text-decoration: none;
+            font-weight: 600;
+        }
 
+        #have-account a:hover {
+            text-decoration: underline;
+        }
 
-@section('content')
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
 
-    <div class="container">
+            .left-column {
+                display: none;
+            }
 
-        <div class="left-column">
-            <img src="/images/medivitta-high-resolution-logo.png" alt="Medivitta Logo">
-        </div>
-        <div class="right-column">
-            <h2>Registar</h2>
-            <form method="post" action="/register">
-                {{ csrf_field() }}
-                <input type="text" placeholder="Nome" name="name" class="full-width">
-                <input type="email" placeholder="Email" name="email" class="full-width">
-                <input type="password" placeholder="Senha" name="password" class="full-width">
-                <input type="number" pattern="\d{9}" placeholder="NIF" name="nif" class="full-width" maxlength="9">
-                <input type="text" placeholder="Rua" name="rua" class="full-width">
-                <div class="short-inputs">
-                    <input type="text" placeholder="Código Postal" name="codigoPostal" class="short" pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$">
-                    <input type="text" placeholder="Porta" name="porta" class="short">
-                </div>
-                <button type="submit">Criar</button>
-            </form>
-
-
-            <p id="no-account">Já tens uma conta? <a href="/login">Login</a></p>
-        </div>
+            .right-column h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="left-column">
+        <img src="/images/medivitta-high-resolution-logo.png" alt="Medivitta Logo">
     </div>
-@endsection
+    <div class="right-column">
+        <h2>Registar</h2>
+        <form method="post" action="/register">
+            {{ csrf_field() }}
+
+            <div class="input-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" placeholder="Digite seu nome" value="{{ old('name') }}" required>
+                @error('name')
+                <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu email" value="{{ old('email') }}" required>
+                @error('email')
+                <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="input-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                @error('password')
+                <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="input-group">
+                <label for="nif">NIF</label>
+                <input type="text" id="nif" name="nif" placeholder="Digite seu NIF" pattern="\d{9}" maxlength="9" value="{{ old('nif') }}" required>
+                @error('nif')
+                <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="input-group">
+                <label for="rua">Rua</label>
+                <input type="text" id="rua" name="rua" placeholder="Digite sua rua" value="{{ old('rua') }}" required>
+                @error('rua')
+                <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="short-inputs">
+                <div class="input-group">
+                    <label for="codigoPostal">Código Postal</label>
+                    <input type="text" id="codigoPostal" name="codigoPostal" placeholder="Código Postal" pattern="^\s*?\d{5}(?:[-\s]\d{4})?\s*?$" value="{{ old('codigoPostal') }}" required>
+                    @error('codigoPostal')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="input-group">
+                    <label for="porta">Porta</label>
+                    <input type="text" id="porta" name="porta" placeholder="Porta" value="{{ old('porta') }}" required>
+                    @error('porta')
+                    <div class="error-message">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <button type="submit">Criar</button>
+        </form>
+        <p id="have-account">Já tens uma conta? <a href="/login">Login</a></p>
+    </div>
+</div>
+</body>
+</html>
