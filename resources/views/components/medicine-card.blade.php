@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card fade-in">
     <a id="medicamento-link" href="medicamentos/{{$medicamento->referencia}}">
         <div class="card-image-container">
             <img
@@ -8,40 +8,35 @@
             >
         </div>
     </a>
-        <div class="card-content-wrapper">
-            <div class="card-content">
-                <div class="carta-head">
-                    <h3 class="card-title">{{ $medicamento->nome }}</h3>
-                </div>
-                <p class="description-text">{{ $medicamento->descricao }}</p>
+    <div class="card-content-wrapper">
+        <div class="card-content">
+            <div class="carta-head">
+                <h3 class="card-title">{{ $medicamento->nome }}</h3>
             </div>
-
-            <div class="card-footer">
-                <div class="card-price">
-                    <span class="price-amount">€ {{ $medicamento->preco }}</span>
-                    <span class="price-unit">/ unidade</span>
-
-                    @if ($medicamento->quantidade <= 0)
-                        <span class="price-unit
-                            out-of-stock">Esgotado</span>
-                    @else
-                        <span class="price-unit
-                            in-stock">Em stock</span>
-                    @endif
-
-
-                </div>
-
-                <button class="add-button" aria-label="Adicionar {{ $medicamento->nome }} aos favoritos">
-                    Adicionar ao carrinho
-                </button>
-            </div>
+            <p class="description-text">{{ $medicamento->descricao }}</p>
         </div>
 
+        <div class="card-footer">
+            <div class="card-price">
+                <span class="price-amount">€ {{ $medicamento->preco }}</span>
+                <span class="price-unit">/ unidade</span>
+
+                @if ($medicamento->quantidade <= 0)
+                    <span class="price-unit out-of-stock">Esgotado</span>
+                @else
+                    <span class="price-unit in-stock">Em stock</span>
+                @endif
+            </div>
+
+            <button class="add-button" aria-label="Adicionar {{ $medicamento->nome }} aos favoritos">
+                Adicionar ao carrinho
+            </button>
+        </div>
+    </div>
 </div>
 
-
 <style>
+    /* Card Styles */
     .card {
         width: 288px;
         border-radius: 12px;
@@ -54,8 +49,23 @@
         flex-direction: column;
         justify-content: space-between;
         margin-bottom: 5%;
+        opacity: 0; /* Start invisible */
+        transform: translateY(20px); /* Start slightly down */
+        animation: fadeIn 0.5s ease-out forwards; /* Apply fade-in animation */
     }
 
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Other Styles */
     .card-content-wrapper {
         display: flex;
         flex-direction: column;
@@ -64,9 +74,8 @@
 
     .card-content {
         padding: 16px;
-        flex-grow: 1; /* Allows the content to grow and push the button down */
+        flex-grow: 1;
         height: 80px;
-
     }
 
     .carta-head {
@@ -142,14 +151,11 @@
 
     .price-unit.out-of-stock {
         color: #FF0000;
-        margin-left: 29.99%;;
+        margin-left: 29.99%;
     }
-
-
 
     .price-unit.in-stock {
         color: #00FF00;
         margin-left: 29.99%;
     }
-
 </style>

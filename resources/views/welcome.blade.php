@@ -59,13 +59,11 @@
         font-weight: 600;
         font-size: 1em;
         padding: 0.75em 1em;
-        color: rgb(53, 161, 168);
+        color: rgb(53, 161, 168, 0.75);
         transition: 4s;
         margin: 0;
         position: relative;
     }
-
-
     .button::before,
     .button::after {
         content: '';
@@ -93,6 +91,9 @@
     .button:focus {
         color: white;
         cursor: pointer;
+    }
+    .button.active {
+        color: rgba(53, 161, 168, 1);
     }
 
     .button:hover::before,
