@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 class MedicamentoController extends Controller
 {
-    public function index(Request $request, $limit = 10)
+    public function index(Request $request, $limit = 10, $view)
     {
+        $view = $view;
         $page = $request->input('page', 1);
         $offset = ($page - 1) * $limit;
         $search = $request->input('search');
@@ -32,7 +33,7 @@ class MedicamentoController extends Controller
         $totalPages = ceil($totalMedicamentos / $limit);
         $hasMore = ($page < $totalPages);
 
-        return view('welcome', [
+        return view($view, [
             'medicamentos' => $medicamentos,
             'page' => $page,
             'hasMore' => $hasMore,
@@ -40,7 +41,6 @@ class MedicamentoController extends Controller
             'search' => $search,
         ]);
     }
-
 
 
     public function show($referencia)
