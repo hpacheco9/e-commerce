@@ -1,5 +1,80 @@
-<style>
+<header>
+    <div class="contentor">
+        <a href="/" class="logo-container">
+            <img src="/images/medivitta-high-resolution-logo.png" alt="Medivitta Logo" id="logo">
+        </a>
 
+        <div class="search-container">
+            <form action="/medicamentos" method="GET">
+                {{csrf_field()}}
+                <input id="search-bar" type="search" name="search" placeholder="Pesquisar">
+                <img src="/images/search-icon.svg" alt="Search" class="search-icon">
+            </form>
+        </div>
+        <div class="nav-section">
+            @guest
+                <span class="login"><a href="/login">Login</a></span>
+            @endguest
+            @auth
+                <nav>
+                    <div class="user-dropdown">
+                        <button class="user-name" onclick="toggleDropdown()" aria-haspopup="true" aria-expanded="false">
+                            <svg class="user-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            {{ Auth::user()->name }}
+                        </button>
+                        <div class="dropdown-content" id="userDropdown">
+                            <a href="/logout">Logout</a>
+                            <a href="/perfil">Perfil</a>
+                        </div>
+                    </div>
+                </nav>
+                    <a href="/carrinho" class="cart-link">
+                        <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                    </a>
+            @endauth
+
+        </div>
+    </div>
+    <div class="header-separator"></div>
+</header>
+
+
+<script>
+    function toggleDropdown() {
+        var dropdown = document.getElementById("userDropdown");
+        dropdown.classList.toggle("show");
+        var userNameElement = document.querySelector(".user-name");
+        var isExpanded = userNameElement.getAttribute("aria-expanded") === "true";
+        userNameElement.setAttribute("aria-expanded", !isExpanded);
+    }
+
+    document.addEventListener('click', function(event) {
+        var dropdown = document.getElementById("userDropdown");
+        var userNameElement = document.querySelector(".user-name");
+        if (!userNameElement.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.remove("show");
+            userNameElement.setAttribute("aria-expanded", "false");
+        }
+    });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            var dropdown = document.getElementById("userDropdown");
+            var userNameElement = document.querySelector(".user-name");
+            dropdown.classList.remove("show");
+            userNameElement.setAttribute("aria-expanded", "false");
+        }
+    });
+</script>
+
+<style>
     body {
         margin: 0;
         font-family: 'Inter', sans-serif;
@@ -23,7 +98,7 @@
 
     .logo-container {
         flex-shrink: 0;
-        flex-basis: 50px; /* Fixed width for logo */
+        flex-basis: 50px;
     }
 
     #logo {
@@ -184,79 +259,3 @@
     input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 </style>
-
-<header>
-    <div class="contentor">
-        <a href="/" class="logo-container">
-            <img src="/images/medivitta-high-resolution-logo.png" alt="Medivitta Logo" id="logo">
-        </a>
-
-        <div class="search-container">
-            <form action="/medicamentos" method="GET">
-                {{csrf_field()}}
-                <input id="search-bar" type="search" name="search" placeholder="Pesquisar">
-                <img src="/images/search-icon.svg" alt="Search" class="search-icon">
-            </form>
-        </div>
-        <div class="nav-section">
-            @guest
-                <span class="login"><a href="/login">Login</a></span>
-            @endguest
-            @auth
-                <nav>
-                    <div class="user-dropdown">
-                        <button class="user-name" onclick="toggleDropdown()" aria-haspopup="true" aria-expanded="false">
-                            <svg class="user-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                            {{ Auth::user()->name }}
-                        </button>
-                        <div class="dropdown-content" id="userDropdown">
-                            <a href="/logout">Logout</a>
-                            <a href="/perfil">Perfil</a>
-                        </div>
-                    </div>
-                </nav>
-                    <a href="/carrinho" class="cart-link">
-                        <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <circle cx="9" cy="21" r="1"></circle>
-                            <circle cx="20" cy="21" r="1"></circle>
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                        </svg>
-                    </a>
-            @endauth
-
-        </div>
-    </div>
-    <div class="header-separator"></div>
-</header>
-
-
-<script>
-    function toggleDropdown() {
-        var dropdown = document.getElementById("userDropdown");
-        dropdown.classList.toggle("show");
-        var userNameElement = document.querySelector(".user-name");
-        var isExpanded = userNameElement.getAttribute("aria-expanded") === "true";
-        userNameElement.setAttribute("aria-expanded", !isExpanded);
-    }
-
-    document.addEventListener('click', function(event) {
-        var dropdown = document.getElementById("userDropdown");
-        var userNameElement = document.querySelector(".user-name");
-        if (!userNameElement.contains(event.target) && !dropdown.contains(event.target)) {
-            dropdown.classList.remove("show");
-            userNameElement.setAttribute("aria-expanded", "false");
-        }
-    });
-
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            var dropdown = document.getElementById("userDropdown");
-            var userNameElement = document.querySelector(".user-name");
-            dropdown.classList.remove("show");
-            userNameElement.setAttribute("aria-expanded", "false");
-        }
-    });
-</script>

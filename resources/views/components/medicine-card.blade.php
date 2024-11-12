@@ -48,9 +48,9 @@
         flex-direction: column;
         justify-content: space-between;
         margin-bottom: 5%;
-        opacity: 0; /* Start invisible */
-        transform: translateY(20px); /* Start slightly down */
-        animation: fadeIn 0.5s ease-out forwards; /* Apply fade-in animation */
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.5s ease-out forwards;
     }
 
     @keyframes fadeIn {
@@ -64,7 +64,6 @@
         }
     }
 
-    /* Other Styles */
     .card-content-wrapper {
         display: flex;
         flex-direction: column;

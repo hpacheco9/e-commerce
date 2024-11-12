@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Test page')
+@section('title', 'Página Inicial')
 
 @section('content')
 
@@ -26,7 +26,7 @@
 
             @for($i = 1; $i <= $totalPages; $i++)
                 @if($i == $page)
-                    <span class="button active">{{ $i }}</span> <!-- Active page -->
+                    <span class="button active">{{ $i }}</span>
                 @else
                     <a class="button" href="?page={{ $i }}&search={{ $search }}">{{ $i }}</a>
                 @endif

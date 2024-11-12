@@ -7,25 +7,23 @@ use Illuminate\Http\Request;
 
 class MedicamentoController extends Controller
 {
-    public function index(Request $request, $limit = 10, $view = 'welcome')
+    public function index(Request $request, $limit = 10, $view = 'mainpage')
     {
-        $page = max(1, $request->input('page', 1)); // Ensure page is at least 1
+        $page = max(1, $request->input('page', 1));
         $search = $request->input('search');
 
-        // Get total count first
         if ($search) {
             $totalMedicamentos = Medicamento::where('nome', 'like', $search . '%')->count();
         } else {
             $totalMedicamentos = Medicamento::count();
         }
 
-        // Calculate total pages
+
         $totalPages = max(1, ceil($totalMedicamentos / $limit));
 
-        // Adjust current page if it exceeds total pages
         $page = min($page, $totalPages);
 
-        // Calculate offset after page adjustment
+
         $offset = ($page - 1) * $limit;
 
         // Get paginated results

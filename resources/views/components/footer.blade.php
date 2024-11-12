@@ -48,8 +48,7 @@
     }
 
 
-    .social-icon,
-    .menu {
+    .social-icon {
         position: relative;
         display: flex;
         justify-content: center;
@@ -58,8 +57,7 @@
         flex-wrap: wrap;
     }
 
-    .social-icon__item,
-    .menu__item {
+    .social-icon__item{
         list-style: none;
     }
 
@@ -74,20 +72,6 @@
         transform: translateY(-5px);
     }
 
-    .menu__link {
-        font-size: 1rem;
-        color: #fff;
-        margin: 0 5px;
-        display: inline-block;
-        transition: 0.5s;
-        text-decoration: none;
-        opacity: 0.75;
-        font-weight: 300;
-    }
-
-    .menu__link:hover {
-        opacity: 1;
-    }
 
     .footer p {
         color: #fff;

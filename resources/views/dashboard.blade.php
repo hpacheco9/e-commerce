@@ -128,6 +128,7 @@
 @endsection
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script>
     function openPopup(medicamento) {
         var form = document.getElementById('editMedicamentoForm');
@@ -143,11 +144,8 @@
         editModal.show();
     }
 
-
 </script>
 
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -186,12 +184,6 @@
         font-size: 14px;
     }
 
-    .table-container {
-        background-color: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    }
 
     table {
         width: 100%;

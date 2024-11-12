@@ -5,10 +5,9 @@ use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdmin;
 
-// Route::get('/', [MedicamentoController::class, 'index'])->with($view, "welcome");
 
 Route::get('/', function () {
-    return (new MedicamentoController)->index(request(), 10, 'welcome');
+    return (new MedicamentoController)->index(request(), 10, 'mainpage');
 });
 
 Route::get('login', function () {
@@ -18,12 +17,6 @@ Route::get('login', function () {
 Route::get('register', function () {
     return view('register');
 });
-
-// Route::get('dashboard', [MedicamentoController::class, 'index'])->with($view, "dashboard");
-
-//Route::get('dashboard', function () {
-//    return (new MedicamentoController)->index(request(), 20, 'dashboard');
-//});
 
 Route::get('dashboard', function () {
     return (new MedicamentoController)->index(request(), 20, 'dashboard');
@@ -38,24 +31,8 @@ Route::delete('/medicamentos/{referencia}', [MedicamentoController::class, 'dest
 
 Route::post('/create', [MedicamentoController::class, 'create']);
 
-//Route::patch('/update/{referencia}', [MedicamentoController::class, 'update'])->name('medicamentos.update');
 
 Route::patch('/medicamentos/{referencia}', [MedicamentoController::class, 'update'])->name('medicamentos.update');
-
-
-
-
-
-/*
-Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('dashboard', function () {
-        return (new MedicamentoController)->index(request(), 20, 'dashboard');
-    });
-
-    // Route::get('logout', [UserController::class, 'logout']);
-});
-*/
-
 
 Route::post('login', [UserController::class, 'login']);
 

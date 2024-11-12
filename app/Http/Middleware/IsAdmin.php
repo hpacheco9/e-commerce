@@ -17,12 +17,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        // Check if the user is authenticated and has isAdmin = 1
         if (Auth::check() && Auth::user()->isAdmin == 1) {
-            return $next($request);  // Allow access to the route
+            return $next($request);
         }
-
-        // If not an admin, redirect or return a 403 response
-        return redirect('/login');
+        return redirect('/');
     }
 }
