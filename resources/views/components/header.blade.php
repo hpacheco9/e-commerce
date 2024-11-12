@@ -172,6 +172,9 @@
         text-decoration: none;
         color: #000;
     }
+    form {
+        width: 100%;
+    }
 
 </style>
 
@@ -182,10 +185,12 @@
         </a>
 
         <div class="search-container">
-            <input id="search-bar" type="search" placeholder="Pesquisar">
-            <img src="/images/search-icon.svg" alt="Search" class="search-icon">
+            <form action="/medicamentos" method="GET">
+                {{csrf_field()}}
+                <input id="search-bar" type="search" name="search" placeholder="Pesquisar">
+                <img src="/images/search-icon.svg" alt="Search" class="search-icon">
+            </form>
         </div>
-
         <div class="nav-section">
             @guest
                 <span class="login"><a href="/login">Login</a></span>

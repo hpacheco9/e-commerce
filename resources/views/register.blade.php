@@ -11,7 +11,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: #ffffff;

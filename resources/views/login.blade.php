@@ -163,7 +163,7 @@
             {{ csrf_field()  }}
             <div class="input-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <input type="email" id="email" name="email" placeholder="Introduza o seu email" required>
                 <div class="error-message">
                     <?php
                     if (isset($errors) && $errors->has('email')) {
@@ -174,7 +174,7 @@
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <input type="password" id="password" name="password" placeholder="Introduza a sua password" required>
                 <div class="error-message">
                     <?php
                     if (isset($errors) && $errors->has('password')) {

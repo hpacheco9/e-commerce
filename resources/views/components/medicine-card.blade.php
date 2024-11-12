@@ -36,7 +36,6 @@
 </div>
 
 <style>
-    /* Card Styles */
     .card {
         width: 288px;
         border-radius: 12px;

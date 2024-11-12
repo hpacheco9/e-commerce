@@ -37,7 +37,7 @@
                 </div>
                 <div class="seletor-quantidade">
                     <button id="decremento" class="botao-quantidade" onclick="alterarQuantidade(-1)">-</button>
-                    <input type="number" class="input-quantidade" id="quantidade" value="1" min="1" readonly inputmode="numeric">
+                    <input type="number" class="input-quantidade" id="quantidade" value="1" min="1"  max="100" inputmode="numeric">
 
                     <button class="botao-quantidade" onclick="alterarQuantidade(1)">+</button>
                 </div>
@@ -45,7 +45,7 @@
             </div>
         </div>
     </div>
-    <div class="alerta" id="alerta">Produto adicionado ao carrinho com sucesso!</div>
+    <div class="alerta" id="alerta">Produto adicionado com sucesso!</div>
 </div>
 
 <script>
@@ -69,7 +69,6 @@
         let alerta = document.getElementById('alerta');
         alerta.classList.add('show');
 
-        // Remover o alerta após 2 segundos
         setTimeout(() => {
             alerta.classList.remove('show');
         }, 2000);
@@ -140,7 +139,7 @@
     }
 
     .input-quantidade {
-        -moz-appearance: textfield; /* Hides controls in Firefox */
+        -moz-appearance: textfield;
     }
 
     .titulo-produto {
@@ -236,11 +235,11 @@
 
     .alerta {
         position: fixed;
-        top: 2rem; /* Position it near the top */
-        right: 2rem; /* Position it near the right */
-        transform: translateY(-100%); /* Start hidden above */
+        top: 2rem;
+        right: 2rem;
+        transform: translateY(-100%);
         max-width: 300px;
-        width: 90%; /* Responsive width */
+        width: 90%;
         background-color: #e3f5f7;
         color: #149FA8;
         padding: 1rem 2rem;
@@ -248,19 +247,18 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease-out, opacity 0.3s ease;
         opacity: 0;
-        z-index: 1000; /* Ensure it appears above other elements */
+        z-index: 1000;
     }
 
     .alerta.show {
-        transform: translateY(0); /* Slide down slightly into view */
+        transform: translateY(0);
         opacity: 1;
     }
 
-    /* Smaller font size and padding for mobile screens */
     @media (max-width: 600px) {
         .alerta {
-            top: 1rem; /* Reduce top space for mobile */
-            right: 1rem; /* Reduce right space for mobile */
+            top: 1rem;
+            right: 1rem;
             padding: 0.8rem 1.5rem;
             font-size: 0.875rem;
         }
