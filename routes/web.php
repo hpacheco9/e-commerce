@@ -33,6 +33,7 @@ Route::post('register', [UserController::class, 'register']);
 
 Route::get('medicamentos/{referencia}', [MedicamentoController::class, 'show']);
 Route::get('/medicamentos', [MedicamentoController::class, 'index']);
+Route::delete('/medicamentos/{referencia}', [MedicamentoController::class, 'destroy'])->name('medicamentos.destroy');
 
 /*
 Route::middleware(['auth', 'isAdmin'])->group(function () {

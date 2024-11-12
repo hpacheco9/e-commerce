@@ -41,15 +41,21 @@
                             </svg>
                             <span class="sr-only">Edit</span>
                         </button>
-                        <button class="btn btn-destructive btn-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                            </svg>
-                            <span class="sr-only">Delete</span>
-                        </button>
+                        <form action="{{ route('medicamentos.destroy', $medicamento->referencia) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');" style="display:inline;">
+                            {{csrf_field()}}
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-destructive btn-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                                <span class="sr-only">Delete</span>
+                            </button>
+                        </form>
+
+
                     </td>
                 </tr>
                 @endforeach
@@ -127,13 +133,34 @@
 
     }
 
+
     th {
         background-color: #ffffff;
         font-weight: 600;
         color: #374151;
-        border-top-right-radius: 10px;
-
+        padding: 15px;
+        border-bottom: 1px solid #e5e7eb;
     }
+    tr:hover {
+        background-color: #f2f2f2;
+    }
+
+
+    th:first-child {
+        border-top-left-radius: 8px;
+    }
+    th:last-child {
+        border-top-right-radius: 8px;
+    }
+
+
+    td {
+        padding: 18px;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+
 
     .actions {
         text-align: right;
@@ -158,7 +185,7 @@
     }
 
     .btn-icon {
-        padding: 6px;
+        padding: 5px;
     }
 
     .sr-only {

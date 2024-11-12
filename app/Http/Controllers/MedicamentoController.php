@@ -39,6 +39,18 @@ class MedicamentoController extends Controller
         ]);
     }
 
+    public function destroy($referencia)
+    {
+
+
+        Medicamento::where('referencia', $referencia)->delete();
+
+
+        return redirect("/dashboard");
+    }
+
+
+
 
     public function show($referencia)
     {
