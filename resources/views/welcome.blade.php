@@ -3,19 +3,25 @@
 @section('title', 'Test page')
 
 @section('content')
-    <div class="container">
-        @foreach ($medicamentos as $medicamento)
-            <x-medicine-card :medicamento="$medicamento" />
-        @endforeach
-    </div>
+
+        @if(count($medicamentos) > 0)
+            <div class="container">
+            @foreach ($medicamentos as $medicamento)
+                <x-medicine-card :medicamento="$medicamento" />
+            @endforeach
+            </div>
+        @else
+            <div class="cont2">
+                <h2>Não foram encontrados medicamentos</h2>
+            </div>
+        @endif
+
 
     <div class="pagination-controls">
-        <!-- Previous Button -->
         @if($page > 1)
             <a class="button" href="?page={{ $page - 1 }}&search={{ $search }}">Anterior</a>
         @endif
 
-        <!-- Page Number Links -->
         @for($i = 1; $i <= $totalPages; $i++)
             @if($i == $page)
                 <span class="button active">{{ $i }}</span> <!-- Active page -->
@@ -24,7 +30,6 @@
             @endif
         @endfor
 
-        <!-- Next Button -->
         @if($hasMore)
             <a class="button" href="?page={{ $page + 1 }}&search={{ $search }}">Avançar</a>
         @endif
@@ -41,12 +46,24 @@
         margin: 0 auto;
         justify-items: center;
     }
+    h2 {
+        text-align: center;
+        color: #808080;
+    }
+    .cont2 {
+        display: flex;
+        justify-content: center;
+        left: 50%;
+        align-items: center;
+        margin-top: 15%;
+    }
+
 
     .pagination-controls {
         display: flex;
-        justify-content: center; /* Center the buttons without gaps */
-        align-items: center; /* Vertically align buttons */
-        margin-top: 20px; /* Space above the buttons */
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
         gap: 10px;
     }
 

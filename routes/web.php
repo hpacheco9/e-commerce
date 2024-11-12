@@ -27,6 +27,7 @@ Route::get('dashboard', function () {
 Route::post('register', [UserController::class, 'register']);
 
 Route::get('medicamentos/{referencia}', [MedicamentoController::class, 'show']);
+Route::get('/medicamentos', [MedicamentoController::class, 'index']);
 
 
 Route::post('login', [UserController::class, 'login']);
