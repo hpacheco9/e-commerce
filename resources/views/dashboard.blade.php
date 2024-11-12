@@ -127,13 +127,34 @@
 
     }
 
+
     th {
         background-color: #ffffff;
         font-weight: 600;
         color: #374151;
-        border-top-right-radius: 10px;
-
+        padding: 15px;
+        border-bottom: 1px solid #e5e7eb;
     }
+    tr:hover {
+        background-color: #f2f2f2;
+    }
+
+
+    th:first-child {
+        border-top-left-radius: 8px;
+    }
+    th:last-child {
+        border-top-right-radius: 8px;
+    }
+
+
+    td {
+        padding: 18px;
+        text-align: left;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+
 
     .actions {
         text-align: right;
@@ -158,7 +179,7 @@
     }
 
     .btn-icon {
-        padding: 6px;
+        padding: 8px;
     }
 
     .sr-only {
