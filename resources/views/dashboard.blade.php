@@ -1,39 +1,53 @@
 @extends('layouts.dashboard')
 @section('title', 'Dashboard')
 
-@section('content')
-<div class="container">
-    <h1 class="mb-4">Medicamentos</h1>
-    <div class="search-container">
-        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-        <input type="text" class="search-input" placeholder="Buscar medicamento...">
-    </div>
 
-    <div class="table-responsive">
-        <table>
-            <thead>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+@section('content')
+    <div class="container">
+        <h1 class="mb-4">Medicamentos</h1>
+        <div class="search-container">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <form action="/dashboard" method="GET">
+                {{csrf_field()}}
+                <input type="search" class="search-input" placeholder="Buscar medicamento..." name="search" value="{{$search}}">
+            </form>
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
                 <tr>
                     <th>Referência</th>
                     <th>Nome</th>
                     <th>Quantidade</th>
                     <th>Indústria</th>
+                    <th>Preço</th>
+                    <th>Dosagem</th>
+                    <th>Descricao</th>
+                    <th>Forma</th>
                     <th>Created At</th>
                     <th>Updated At</th>
-                    <th>Actions</th>
+                    <th>Ações</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @foreach($medicamentos as $medicamento)
-                <tr>
-                    <td>{{ $medicamento->referencia }}</td>
-                    <td>{{ $medicamento->nome }}</td>
-                    <td>{{ $medicamento->quantidade }}</td>
-                    <td>{{ $medicamento->industria }}</td>
-                    <td>{{ $medicamento->created_at->toFormattedDateString() }}</td>
-                    <td>{{ $medicamento->updated_at->toFormattedDateString() }}</td>
-                    <td>
+                    <tr>
+                        <td>{{ $medicamento->referencia }}</td>
+                        <td>{{ $medicamento->nome }}</td>
+                        <td>{{ $medicamento->quantidade }}</td>
+                        <td>{{ $medicamento->industria }}</td>
+                        <td>{{ $medicamento->preco }}</td>
+                        <td>{{ $medicamento->dosagem }}</td>
+                        <td>{{ $medicamento->descricao }}</td>
+                        <td>{{ $medicamento->forma }}</td>
+                        <td>{{ $medicamento->created_at->toFormattedDateString() }}</td>
+                        <td>{{ $medicamento->updated_at->toFormattedDateString() }}</td>
+                        <td>
                             <button type="button" class="btn btn-outline btn-icon" onclick="openPopup({{json_encode($medicamento)}})">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -41,59 +55,97 @@
                                 </svg>
                                 <span class="sr-only">Edit</span>
                             </button>
-                        <form action="{{ route('medicamentos.destroy', $medicamento->referencia) }}" method="POST" onsubmit="return confirm('Tem a certeza que quer remover o medicamento ?');" style="display:inline;">
-                            {{csrf_field()}}
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-destructive btn-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                                </svg>
-                                <span class="sr-only">Delete</span>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                            <form action="{{ route('medicamentos.destroy', $medicamento->referencia) }}" method="POST" onsubmit="return confirm('Tem a certeza que quer remover o medicamento ?');" style="display:inline;">
+                                {{csrf_field()}}
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-destructive btn-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                    </svg>
+                                    <span class="sr-only">Delete</span>
+                                </button>
+                            </form>
+                            <div class="modal fade" id="editMedicamentoModal" tabindex="-1" aria-labelledby="editMedicamentoModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editMedicamentoModalLabel">Editar Medicamento</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="editMedicamentoForm" method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <div class="mb-3">
+                                                    <label for="editNome" class="form-label">Nome</label>
+                                                    <input type="text" class="form-control" id="editNome" name="nome" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editQuantidade" class="form-label">Quantidade</label>
+                                                    <input type="number" class="form-control" id="editQuantidade" name="quantidade" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editIndustria" class="form-label">Indústria</label>
+                                                    <input type="text" class="form-control" id="editIndustria" name="industria" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editPreco" class="form-label">Preço</label>
+                                                    <input type="number" step="any" class="form-control" id="editPreco" name="preco" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editDosagem" class="form-label">Dosagem</label>
+                                                    <input type="text" class="form-control" id="editDosagem" name="dosagem" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editDescricao" class="form-label">Descrição</label>
+                                                    <input type="text" class="form-control" id="editDescricao" name="descricao" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="editForma" class="form-label">Forma</label>
+                                                    <input type="text" class="form-control" id="editForma" name="forma" required>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
                 @endforeach
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
+
 
 @endsection
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-{{--
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function editMedicamento(medicamento) {
-        // Set the form action URL to the update route for this medicamento
-        document.getElementById('editMedicamentoForm').action = `/medicamentos/${medicamento.referencia}`;
-
-        // Populate form fields with current medicamento data
-        document.getElementById('editNome').value = medicamento.nome;
-        document.getElementById('editQuantidade').value = medicamento.quantidade;
-        document.getElementById('editIndustria').value = medicamento.industria;
-
-        // Show the modal
-        var editModal = new bootstrap.Modal(document.getElementById('editMedicamentoModal'));
-        editModal.show();
-    }
-</script>
---}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     function openPopup(medicamento) {
-        document.getElementById('editReferencia').value = medicamento.referencia; // Set referencia
+        var form = document.getElementById('editMedicamentoForm');
+        form.action = '/medicamentos/' + medicamento.referencia;
+        document.getElementById('editDescricao').value = medicamento.descricao;
+        document.getElementById('editPreco').value = medicamento.preco;
+        document.getElementById('editForma').value = medicamento.forma;
+        document.getElementById('editDosagem').value = medicamento.dosagem;
         document.getElementById('editNome').value = medicamento.nome;
         document.getElementById('editQuantidade').value = medicamento.quantidade;
         document.getElementById('editIndustria').value = medicamento.industria;
         var editModal = new bootstrap.Modal(document.getElementById('editMedicamentoModal'));
         editModal.show();
     }
+
+
 </script>
+
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
@@ -105,7 +157,7 @@
     }
 
     .container {
-        max-width: 1200px;
+        max-width: 2000px;
         margin: 0 auto;
         padding: 24px;
     }
@@ -157,8 +209,6 @@
         padding: 12px 16px;
         text-align: left;
         border-bottom: 1px solid #e5e7eb;
-
-
 
     }
 

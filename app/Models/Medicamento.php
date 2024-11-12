@@ -4,13 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 
 class Medicamento extends Model
 {
     use HasFactory;
-    protected $table = 'medicamentos';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'referencia',
+        'nome',
+        'quantidade',
+        'industria',
+    ];
+
     protected $primaryKey = 'referencia';
     public $incrementing = false;
-    protected $keyType = 'integer';
+    protected $keyType = 'string';
+
 }

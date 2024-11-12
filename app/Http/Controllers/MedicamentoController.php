@@ -7,15 +7,13 @@ use Illuminate\Http\Request;
 
 class MedicamentoController extends Controller
 {
-    public function index(Request $request, $limit = 10, $view)
+    public function index(Request $request, $limit = 10, $view="welcome")
     {
-        $view = $view;
         $page = $request->input('page', 1);
         $offset = ($page - 1) * $limit;
         $search = $request->input('search');
-
         if ($search) {
-            $medicamentos = Medicamento::where('nome', 'like', '%' . $search . '%')
+            $medicamentos = Medicamento::where('nome', 'like',  $search . '%' )
                 ->skip($offset)
                 ->take($limit)
                 ->get();
@@ -42,48 +40,33 @@ class MedicamentoController extends Controller
     public function destroy($referencia)
     {
 
-
         Medicamento::where('referencia', $referencia)->delete();
 
         return redirect("/dashboard");
     }
 
-    // Adicionar Post e Patch
-
-    public function create()
-    {
-
-    }
-
-
-    // Pop up na página, para update do medicamento
-
     public function update(Request $request)
     {
-        // Validate the incoming request data
-
         $request->validate([
-            'referencia' => 'required|string',
             'nome' => 'required|string|max:255',
             'quantidade' => 'required|integer',
             'industria' => 'required|string|max:255',
+            'forma' => 'required|string|max:150',
+            'dosagem' => 'required|string|max:150',
+            'descricao' => 'required|string|max:255',
+            'preco' => 'required'
         ]);
 
-
-        // Find the Medicamento by referencia and update it
-        $medicamento = Medicamento::where('nome', $request->referencia)->first();
-
-        // Update fields with the request data
+        $medicamento = Medicamento::where('referencia', $request->referencia)->firstOrFail();
         $medicamento->nome = $request->input('nome');
         $medicamento->quantidade = $request->input('quantidade');
         $medicamento->industria = $request->input('industria');
-
-        // Save the updated Medicamento
+        $medicamento->dosagem = $request->input('dosagem');
+        $medicamento->preco = $request->input('preco');
+        $medicamento->forma = $request->input('forma');
+        $medicamento->descricao = $request->input('descricao');
         $medicamento->save();
-
-        // Redirect back to the dashboard with a success message
         return redirect('/dashboard');
-
     }
 
 

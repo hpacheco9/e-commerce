@@ -27,7 +27,7 @@ Route::get('register', function () {
 
 Route::get('dashboard', function () {
     return (new MedicamentoController)->index(request(), 20, 'dashboard');
-})->middleware(['auth', IsAdmin::class]);  // Apply both auth and isAdmin middleware
+})->middleware(['auth', IsAdmin::class]);
 
 Route::post('register', [UserController::class, 'register']);
 
@@ -40,9 +40,8 @@ Route::post('/create', [MedicamentoController::class, 'create']);
 
 //Route::patch('/update/{referencia}', [MedicamentoController::class, 'update'])->name('medicamentos.update');
 
-Route::patch('/update', function () {
-    return (new MedicamentoController)->update(request());
-})->name('medicamentos.update');
+Route::patch('/medicamentos/{referencia}', [MedicamentoController::class, 'update'])->name('medicamentos.update');
+
 
 
 
