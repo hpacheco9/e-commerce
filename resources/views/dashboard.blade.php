@@ -34,14 +34,14 @@
                     <td>{{ $medicamento->created_at->toFormattedDateString() }}</td>
                     <td>{{ $medicamento->updated_at->toFormattedDateString() }}</td>
                     <td>
-                        <button class="btn btn-outline btn-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                            </svg>
-                            <span class="sr-only">Edit</span>
-                        </button>
-                        <form action="{{ route('medicamentos.destroy', $medicamento->referencia) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');" style="display:inline;">
+                            <button type="button" class="btn btn-outline btn-icon" onclick="openPopup({{json_encode($medicamento)}})">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                </svg>
+                                <span class="sr-only">Edit</span>
+                            </button>
+                        <form action="{{ route('medicamentos.destroy', $medicamento->referencia) }}" method="POST" onsubmit="return confirm('Tem a certeza que quer remover o medicamento ?');" style="display:inline;">
                             {{csrf_field()}}
                             @method('DELETE')
                             <button type="submit" class="btn btn-destructive btn-icon">
@@ -54,8 +54,6 @@
                                 <span class="sr-only">Delete</span>
                             </button>
                         </form>
-
-
                     </td>
                 </tr>
                 @endforeach
@@ -64,8 +62,39 @@
     </div>
 </div>
 
-
 @endsection
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+{{--
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function editMedicamento(medicamento) {
+        // Set the form action URL to the update route for this medicamento
+        document.getElementById('editMedicamentoForm').action = `/medicamentos/${medicamento.referencia}`;
+
+        // Populate form fields with current medicamento data
+        document.getElementById('editNome').value = medicamento.nome;
+        document.getElementById('editQuantidade').value = medicamento.quantidade;
+        document.getElementById('editIndustria').value = medicamento.industria;
+
+        // Show the modal
+        var editModal = new bootstrap.Modal(document.getElementById('editMedicamentoModal'));
+        editModal.show();
+    }
+</script>
+--}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function openPopup(medicamento) {
+        document.getElementById('editReferencia').value = medicamento.referencia; // Set referencia
+        document.getElementById('editNome').value = medicamento.nome;
+        document.getElementById('editQuantidade').value = medicamento.quantidade;
+        document.getElementById('editIndustria').value = medicamento.industria;
+        var editModal = new bootstrap.Modal(document.getElementById('editMedicamentoModal'));
+        editModal.show();
+    }
+</script>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
     body {
@@ -213,4 +242,3 @@
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>

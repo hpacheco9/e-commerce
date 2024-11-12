@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('medicamentos', function (Blueprint $table) {
-            $table->integer('referencia')->nullable(false)->primary();
+            $table->integer('referencia')->primary();
             $table->string('nome', 255);
             $table->float('preco', 2);
             $table->text('descricao');
             $table->string('forma');
             $table->string('dosagem');
-            $table->string('imagem', 255);
+            $table->string('imagem', 255)->nullabe();
             $table->integer('quantidade');
             $table->string('industria');
             $table->timestamps();

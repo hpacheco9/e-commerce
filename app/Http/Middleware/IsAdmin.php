@@ -23,6 +23,6 @@ class IsAdmin
         }
 
         // If not an admin, redirect or return a 403 response
-        return redirect('/');
+        return redirect('/login');
     }
 }

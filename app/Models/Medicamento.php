@@ -9,4 +9,8 @@ use Illuminate\Notifications\Notifiable;
 class Medicamento extends Model
 {
     use HasFactory;
+    protected $table = 'medicamentos';
+    protected $primaryKey = 'referencia';
+    public $incrementing = false;
+    protected $keyType = 'integer';
 }

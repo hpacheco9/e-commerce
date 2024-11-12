@@ -35,6 +35,18 @@ Route::get('medicamentos/{referencia}', [MedicamentoController::class, 'show']);
 Route::get('/medicamentos', [MedicamentoController::class, 'index']);
 Route::delete('/medicamentos/{referencia}', [MedicamentoController::class, 'destroy'])->name('medicamentos.destroy');
 
+
+Route::post('/create', [MedicamentoController::class, 'create']);
+
+//Route::patch('/update/{referencia}', [MedicamentoController::class, 'update'])->name('medicamentos.update');
+
+Route::patch('/update', function () {
+    return (new MedicamentoController)->update(request());
+})->name('medicamentos.update');
+
+
+
+
 /*
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', function () {
