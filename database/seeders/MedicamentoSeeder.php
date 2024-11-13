@@ -6,13 +6,18 @@ use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
 
+// use App\Models\Medicamento;
+
 class MedicamentoSeeder extends Seeder
 {
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
+        // Medicamento::factory()->count(40)->create();
+
         DB::table('medicamentos')->insert([
             [
                 'referencia' => 1001,
@@ -536,4 +541,5 @@ class MedicamentoSeeder extends Seeder
             ]
         ]);
     }
+
 }

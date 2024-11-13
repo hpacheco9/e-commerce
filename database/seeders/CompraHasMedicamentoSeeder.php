@@ -13,7 +13,7 @@ class CompraHasMedicamentoSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('compra_has_medicamentos')->insert([
+        DB::table('compra_has_medicamento')->insert([
             [
                 'compra_id' => 1,
                 'medicamento_referencia' => '1001',

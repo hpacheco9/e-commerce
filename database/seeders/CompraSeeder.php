@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+// use App\Models\Compra;
 
 class CompraSeeder extends Seeder
 {
@@ -13,6 +14,9 @@ class CompraSeeder extends Seeder
      */
     public function run(): void
     {
+
+        // Teste
+        // Compra::factory()->count(10)->create();
         DB::table('compras')->insert([
             [
                 'id' => 1,
@@ -35,6 +39,9 @@ class CompraSeeder extends Seeder
                 'total' => 103.20,
                 'data' => '2024-12-22',
                 'user_email' => 'user2@example.com',
+                'created_at' => now(),
+                'updated_at' => now(),
             ]]);
     }
 }
+

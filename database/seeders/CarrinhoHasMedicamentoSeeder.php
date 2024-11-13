@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+// use App\Models\CarrinhoHasMedicamento;
 
 class CarrinhoHasMedicamentoSeeder extends Seeder
 {
@@ -12,6 +13,8 @@ class CarrinhoHasMedicamentoSeeder extends Seeder
      */
     public function run(): void
     {
+        // CarrinhoHasMedicamento::factory()->count(10)->create();
+
         DB::table('carrinho_has_medicamentos')->insert([
             [
                 'user_email' => 'miguel@gmail.com',
