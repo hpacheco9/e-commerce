@@ -34,12 +34,10 @@ Route::get('/medicamentos', [MedicamentoController::class, 'index']);
 Route::delete('/medicamentos/{referencia}', [MedicamentoController::class, 'destroy'])->name('medicamentos.destroy');
 
 
-Route::post('/create', [MedicamentoController::class, 'create']);
+Route::post('/create', [MedicamentoController::class, 'store'])->middleware(['auth', IsAdmin::class]);
 
 
 Route::patch('/medicamentos/{referencia}', [MedicamentoController::class, 'update'])->name('medicamentos.update');
-
-
 
 Route::get('logout', [UserController::class, 'logout']);
 

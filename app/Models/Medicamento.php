@@ -15,13 +15,19 @@ class Medicamento extends Model
      * @var array
      */
     protected $fillable = [
+        'referencia',
         'nome',
         'quantidade',
         'industria',
+        'dosagem',
+        'forma',
+        'preco',
+        'descricao',
+        'imagem',
     ];
 
     protected $primaryKey = 'referencia';
     public $incrementing = false;
-    protected $keyType = 'string';
+    protected $keyType = 'integer';
 
 }

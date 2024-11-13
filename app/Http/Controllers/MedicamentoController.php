@@ -86,6 +86,32 @@ class MedicamentoController extends Controller
         return redirect('/dashboard');
     }
 
+    public function store(Request $request)
+    {
+        $existingMedicamento = Medicamento::where('nome', $request->nome)
+            ->where('dosagem', $request->dosagem)
+            ->where('forma', $request->forma)
+            ->first();
+
+        if ($existingMedicamento) {
+            return back()->withErrors(['error' => 'A medicamento with this name, dosage, and form already exists.']);
+        }
+
+        $medicamento = new Medicamento();
+        $medicamento->referencia = $request->referencia;
+        $medicamento->nome = $request->nome;
+        $medicamento->dosagem = $request->dosagem;
+        $medicamento->forma = $request->forma;
+        $medicamento->quantidade = $request->quantidade;
+        $medicamento->industria = $request->industria;
+        $medicamento->preco = $request->preco;
+        $medicamento->descricao = $request->descricao;
+        $medicamento->imagem = "medicine-placeholder.svg";
+
+        $medicamento->save();
+
+        return redirect('/dashboard');
+    }
 
     public function show($referencia)
     {
