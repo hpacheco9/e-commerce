@@ -42,4 +42,5 @@ Route::get('logout', [UserController::class, 'logout']);
 
 Route::post('carrinho/{referencia}', [CarrinhoController::class, 'add'])->name('carrinho.add')->middleware('auth');
 
-Route::post('carrinho', [CarrinhoHasMedicamentosController::class, 'addOrCreate'])->name('carrinho.addOrCreate')->middleware('auth');
+Route::get('/carrinho/addOrCreate', [CarrinhoHasMedicamentosController::class, 'addOrCreate'])->name('carrinho.addOrCreate');
+
