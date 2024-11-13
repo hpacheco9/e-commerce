@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Medicamento extends Model
+class Carrinho extends Model
 {
-    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -15,13 +13,10 @@ class Medicamento extends Model
      * @var array
      */
     protected $fillable = [
-        'nome',
-        'quantidade',
-        'industria',
+        'user_email',
     ];
 
-    protected $primaryKey = 'referencia';
+    protected $primaryKey = 'user_email';
     public $incrementing = false;
     protected $keyType = 'string';
-
 }

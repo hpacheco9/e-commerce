@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carrinho_has_medicamento', function (Blueprint $table) {
+        Schema::create('carrinho_has_medicamentos', function (Blueprint $table) {
             $table->string('user_email', 255);
             $table->foreign('user_email')
                 ->references('user_email')
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carrinho_has_medicamento');
+        Schema::dropIfExists('carrinho_has_medicamentos');
     }
 };

@@ -35,13 +35,17 @@
                         <span>{{ $medicamento->referencia }}</span>
                     </div>
                 </div>
-                <div class="seletor-quantidade">
-                    <button id="decremento" class="botao-quantidade" onclick="alterarQuantidade(-1)">-</button>
-                    <input type="number" class="input-quantidade" id="quantidade" value="1" min="1"  max="100" inputmode="numeric">
+                <form action="{{ route('carrinho.add', $medicamento->referencia ) }}" method="post">
+                    @csrf
+                    <div class="seletor-quantidade">
+                        <button id="decremento" class="botao-quantidade" onclick="alterarQuantidade(-1, event)">-</button>
+                        <input type="number" class="input-quantidade" id="quantidade" name="quantidade" value="1" min="1" max="100" inputmode="numeric">
+                        <button class="botao-quantidade" onclick="alterarQuantidade(1, event)">+</button>
+                    </div>
 
-                    <button class="botao-quantidade" onclick="alterarQuantidade(1)">+</button>
-                </div>
-                <button class="botao-comprar" onclick="comprarProduto()">Comprar agora</button>
+
+                    <button class="botao-comprar" type="submit" onclick="comprarProduto()">Comprar agora</button>
+                </form>
             </div>
         </div>
     </div>
@@ -50,6 +54,7 @@
 
 <script>
     function alterarQuantidade(valor) {
+        event.preventDefault();
         let inputQuantidade = document.getElementById('quantidade');
         let quantidadeAtual = parseInt(inputQuantidade.value);
         let novaQuantidade = quantidadeAtual + valor;
@@ -65,13 +70,14 @@
         inputQuantidade.value = novaQuantidade;
     }
 
+
     function comprarProduto() {
         let alerta = document.getElementById('alerta');
         alerta.classList.add('show');
 
         setTimeout(() => {
             alerta.classList.remove('show');
-        }, 2000);
+        }, 3000);
     }
 </script>
 

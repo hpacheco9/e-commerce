@@ -17,6 +17,7 @@ return new class extends Migration
                 ->references('email')
                 ->on('users')
                 ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CarrinhoController;
 use App\Http\Middleware\IsAdmin;
 
 
@@ -38,6 +39,6 @@ Route::post('login', [UserController::class, 'login']);
 
 Route::get('logout', [UserController::class, 'logout']);
 
-
+Route::post('carrinho/{referencia}', [CarrinhoController::class, 'add'])->name('carrinho.add')->middleware('auth');
 
 
