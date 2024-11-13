@@ -14,7 +14,10 @@ Route::get('/', function () {
 
 Route::get('login', function () {
     return view('login');
-});
+})->name('login');
+
+
+Route::post('login', [UserController::class, 'login']);
 
 Route::get('register', function () {
     return view('register');
@@ -36,11 +39,14 @@ Route::post('/create', [MedicamentoController::class, 'create']);
 
 Route::patch('/medicamentos/{referencia}', [MedicamentoController::class, 'update'])->name('medicamentos.update');
 
-Route::post('login', [UserController::class, 'login']);
+
 
 Route::get('logout', [UserController::class, 'logout']);
 
-Route::post('carrinho/{referencia}', [CarrinhoController::class, 'add'])->name('carrinho.add')->middleware('auth');
+Route::post('carrinho/{referencia}', [CarrinhoController::class, 'add'])
+    ->name('carrinho.add')
+    ->middleware('auth');
 
-Route::get('/carrinho/addOrCreate', [CarrinhoHasMedicamentosController::class, 'addOrCreate'])->name('carrinho.addOrCreate');
+
+Route::get('/carrinho/addOrCreate', [CarrinhoHasMedicamentosController::class, 'addOrCreate'])->name('carrinho.addOrCreate')->middleware('auth');
 

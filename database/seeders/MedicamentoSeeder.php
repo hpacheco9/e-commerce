@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
 
-// use App\Models\Medicamento;
+use App\Models\Medicamento;
 
 class MedicamentoSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class MedicamentoSeeder extends Seeder
      */
     public function run(): void
     {
-        // Medicamento::factory()->count(40)->create();
+        Medicamento::factory()->count(200)->create();
 
         DB::table('medicamentos')->insert([
             [

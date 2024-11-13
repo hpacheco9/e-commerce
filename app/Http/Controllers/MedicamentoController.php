@@ -18,11 +18,9 @@ class MedicamentoController extends Controller
             $totalMedicamentos = Medicamento::count();
         }
 
-
         $totalPages = max(1, ceil($totalMedicamentos / $limit));
 
         $page = min($page, $totalPages);
-
 
         $offset = ($page - 1) * $limit;
 
@@ -40,14 +38,21 @@ class MedicamentoController extends Controller
 
         $hasMore = ($page < $totalPages);
 
+        $range = 2;
+        $start = max(1, $page - $range);
+        $end = min($totalPages, $page + $range);
+
         return view($view, [
             'medicamentos' => $medicamentos,
             'page' => $page,
             'hasMore' => $hasMore,
             'totalPages' => $totalPages,
             'search' => $search,
+            'start' => $start,
+            'end' => $end,
         ]);
     }
+
 
     public function destroy($referencia)
     {

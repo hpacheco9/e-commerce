@@ -17,28 +17,26 @@
         @endif
 
 
-    <div class="pagination-controls">
-
-        @if(count($medicamentos) > 0)
-            @if($page > 1)
-                <a class="button" href="?page={{ $page - 1 }}&search={{ $search }}">Anterior</a>
-            @endif
-
-            @for($i = 1; $i <= $totalPages; $i++)
-                @if($i == $page)
-                    <span class="button active">{{ $i }}</span>
-                @else
-                    <a class="button" href="?page={{ $i }}&search={{ $search }}">{{ $i }}</a>
+        <div class="pagination-controls">
+            @if(count($medicamentos) > 0)
+                @if($page > 1)
+                    <a class="button" href="?page={{ $page - 1 }}&search={{ $search }}">Anterior</a>
                 @endif
-            @endfor
 
-            @if($hasMore)
-                <a class="button" href="?page={{ $page + 1 }}&search={{ $search }}">Avançar</a>
+                @for($i = $start; $i <= $end; $i++)
+                    @if($i == $page)
+                        <span class="button active">{{ $i }}</span>
+                    @else
+                        <a class="button" href="?page={{ $i }}&search={{ $search }}">{{ $i }}</a>
+                    @endif
+                @endfor
+
+                @if($hasMore)
+                    <a class="button" href="?page={{ $page + 1 }}&search={{ $search }}">Avançar</a>
+                @endif
             @endif
+        </div>
 
-        @endif
-
-    </div>
 @endsection
 
 <style>
