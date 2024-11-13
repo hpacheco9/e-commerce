@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carrinho;
-use App\Models\CarrinhoHasMedicamento;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,11 +15,12 @@ class CarrinhoController extends Controller
         $userEmail = Auth::user()->email;
         $referencia = $request->referencia;
         $quantidade = $request->input('quantidade');
-
-        $carrinho = Carrinho::firstOrCreate(['user_email' => $userEmail]);
-
-        CarrinhoHasMedicamento::updateOrCreateByCompositeKey($userEmail, $referencia, $quantidade);
-        return redirect("/medicamentos/{$referencia}");
+        Carrinho::firstOrCreate(['user_email' => $userEmail]);
+        return redirect()->route('carrinho.addOrCreate')->with([
+            'user_email' => $userEmail,
+            'referencia' => $referencia,
+            'quantidade' => $quantidade
+        ]);
     }
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarrinhoHasMedicamentosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\UserController;
@@ -41,4 +42,4 @@ Route::get('logout', [UserController::class, 'logout']);
 
 Route::post('carrinho/{referencia}', [CarrinhoController::class, 'add'])->name('carrinho.add')->middleware('auth');
 
-
+Route::post('carrinho', [CarrinhoHasMedicamentosController::class, 'addOrCreate'])->name('carrinho.addOrCreate')->middleware('auth');
