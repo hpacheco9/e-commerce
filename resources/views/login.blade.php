@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -29,7 +30,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
         }
 
         .left-column img {
@@ -70,6 +70,7 @@
 
         .input-group {
             margin-bottom: 1.25rem;
+            position: relative;
         }
 
         .input-group label {
@@ -150,6 +151,22 @@
                 font-size: 2rem;
             }
         }
+        .password-container {
+            position: relative;
+        }
+
+        .input-group .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #9ca3af;
+        }
+
+        .input-group .toggle-password:hover {
+            color: #6b7280;
+        }
     </style>
 </head>
 <body>
@@ -174,7 +191,10 @@
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Introduza a sua password" required>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Introduza a sua password" required>
+                    <i class="fas fa-eye toggle-password"></i>
+                </div>
                 <div class="error-message">
                     <?php
                     if (isset($errors) && $errors->has('password')) {
@@ -189,4 +209,15 @@
     </div>
 </div>
 </body>
+<script>
+    const togglePassword = document.querySelector('.toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        togglePassword.classList.toggle('fa-eye');
+        togglePassword.classList.toggle('fa-eye-slash');
+    });
+</script>
 </html>
