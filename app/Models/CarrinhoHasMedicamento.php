@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class CarrinhoHasMedicamento extends Model
+
 {
+    use HasFactory;
     protected $table = 'carrinho_has_medicamentos';
 
     /**
@@ -22,7 +25,7 @@ class CarrinhoHasMedicamento extends Model
 
     public $incrementing = false;
 
-    // Define the key types
+
     protected $keyType = 'string';
 
 

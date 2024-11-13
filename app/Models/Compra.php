@@ -7,4 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Compra extends Model
 {
     use HasFactory;
+
+    protected $table = 'compras';
+
+    protected $fillable = [
+        'user_email',
+        'total',
+        'created_at',
+        'updated_at',
+    ];
+
+    public $incrementing = true;
+
+    protected $keyType = 'int';
+
+
+
+
 }

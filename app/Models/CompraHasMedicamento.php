@@ -5,19 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Carrinho extends Model
+class CompraHasMedicamento extends Model
 {
     use HasFactory;
+
+    protected $table = 'compra_has_medicamentos';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_email',
+        'compra_id',
+        'medicamento_referencia',
+        'quantidade',
     ];
 
-    protected $primaryKey = 'user_email';
     public $incrementing = false;
+    public $timestamps = false;
     protected $keyType = 'string';
 }
