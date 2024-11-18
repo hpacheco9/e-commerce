@@ -38,7 +38,6 @@ class CarrinhoHasMedicamento extends Model
             ->first();
 
         if ($record) {
-
             DB::table('carrinho_has_medicamentos')
                 ->where('user_email', $userEmail)
                 ->where('medicamento_referencia', $medicamentoReferencia)

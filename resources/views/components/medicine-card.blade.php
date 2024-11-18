@@ -27,10 +27,14 @@
                     <span class="price-unit in-stock">Em stock</span>
                 @endif
             </div>
+            <form action="{{ route('carrinho.add', $medicamento->referencia ) }}" method="post">
+                @csrf
+                <input type="hidden" name="quantidade" value="1">
+                <button type="submit" class="add-button" aria-label="Adicionar {{ $medicamento->nome }} aos favoritos">
+                    Adicionar ao carrinho
+                </button>
+            </form>
 
-            <button class="add-button" aria-label="Adicionar {{ $medicamento->nome }} aos favoritos">
-                Adicionar ao carrinho
-            </button>
         </div>
     </div>
 </div>

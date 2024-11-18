@@ -26,8 +26,35 @@ class CarrinhoHasMedicamentosController extends Controller
             $quantidade
         );
 
-        return redirect("medicamentos/{$referencia}");
+        return redirect()->back();
     }
+
+    public function updateQuantity(Request $request)
+    {
+        $action = $request->input('action');
+        $referencia = $request->input('medicamento_referencia');
+        $quantidade = $request->input('quantidade');
+
+        $quantidadeCarrinho = $quantidade;
+
+        if ($action === 'increase' ) {
+            $quantidadeCarrinho += 1;
+        } elseif ($action === 'decrease' && $quantidade > 1) {
+            $quantidadeCarrinho -= 1;
+        } else {
+            $quantidadeCarrinho = max($quantidade, 1);
+        }
+
+
+        CarrinhoHasMedicamento::updateOrCreateByCompositeKey(
+            Auth::user()->email,
+            $referencia,
+            $quantidadeCarrinho
+        );
+
+        return redirect()->back();
+    }
+
 
     public function removeItem(Request $request)
     {
@@ -36,7 +63,7 @@ class CarrinhoHasMedicamentosController extends Controller
         CarrinhoHasMedicamento::deleteByCompositeKey(Auth::user()->email, $referencia);
 
 
-        return redirect("/carrinho");
+        return redirect()->back();
     }
 
     public function index() {

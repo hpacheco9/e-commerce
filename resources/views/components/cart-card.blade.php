@@ -22,15 +22,34 @@
                             <div class="row"></div>
                         </div>
                         <div class="col">
-                            <a href="#">-</a><input type="number" class="form-input" value={{$item['quantidade']}}><a href="#">+</a>
+                            <form action={{route("cart.update")}} method="POST" class="d-flex align-items-center">
+                                @csrf
+                                <input type="hidden" name="medicamento_referencia" value="{{ $item['medicamento']->referencia }}">
+
+                                <button type="submit" name="action" value="decrease" class="increaseordecrease">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+
+                                <input type="number" name="quantidade" value="{{ $item['quantidade'] }}"
+                                       class="form-control mx-2 text-center" style="width: 60px;" min="1">
+
+                                <button type="submit" name="action" value="increase" class="increaseordecrease">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </form>
                         </div>
-                        <form action={{route("cart.remove")}} method="POST" class="col">  <input type="hidden" name="medicamento_referencia" value="{{ $item['medicamento']->referencia }}"> @csrf &euro; {{$item['quantidade'] * $item['medicamento']->preco}} <button type="submit" class="close">&#10005;</button></form>
+                        <form action={{route("cart.remove")}} method="POST" class="col">
+                            <input type="hidden" name="medicamento_referencia" value="{{ $item['medicamento']->referencia }}">
+                            @csrf &euro; {{$item['quantidade'] * $item['medicamento']->preco}}
+                            <button type="submit" class="close">&#10005;</button>
+                        </form>
                     </div>
                 </div>
             @endforeach
             <div class="back-to-shop"><a href="/">&leftarrow;</a><span>Voltar à pagina inicial</span></div>
         </div>
         <div class="col-md-4 summary">
+            <img src="/images/medivitta-high-resolution-logo-black-transparent.png" style="transform: scale(0.5)" class="img-fluid">
             <div><h5><b>Resumo</b></h5></div>
             <hr>
             <div class="row">
@@ -134,7 +153,7 @@
     }
     h5 {
         font-size: 1.5rem;
-        margin-top: 5vh;
+        margin-top: 1vh;
     }
     hr {
         margin-top: 1.5rem;
@@ -198,15 +217,26 @@
         display: none;
     }
 
-    .form-input {
-        width: 40%;
-        text-align: center;
-
+    .increaseordecrease {
+        background-color: #149FA8;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+        cursor: pointer;
     }
+
+    button:focus {
+        outline: none;
+    }
+
     input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
+    
 </style>
 
