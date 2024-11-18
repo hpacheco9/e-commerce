@@ -51,4 +51,12 @@ class CarrinhoHasMedicamento extends Model
             ]);
         }
     }
+
+    public static function deleteByCompositeKey($userEmail, $medicamentoReferencia)
+    {
+        DB::table('carrinho_has_medicamentos')
+            ->where('user_email', $userEmail)
+            ->where('medicamento_referencia', $medicamentoReferencia)
+            ->delete();
+    }
 }

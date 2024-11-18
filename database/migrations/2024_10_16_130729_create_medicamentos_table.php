@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('medicamentos', function (Blueprint $table) {
             $table->integer('referencia')->primary();
-            $table->string('nome', 255);
-            $table->float('preco', 2);
-            $table->text('descricao');
-            $table->string('forma');
-            $table->string('dosagem');
-            $table->string('imagem', 255)->nullabe();
-            $table->integer('quantidade');
-            $table->string('industria');
-            $table->timestamps();
-        });
+        $table->string('nome', 255);
+        $table->float('preco', 2);
+        $table->text('descricao');
+        $table->string('forma');
+        $table->string('dosagem');
+        $table->string('imagem', 255)->nullabe();
+        $table->integer('quantidade');
+        $table->string('industria');
+        $table->timestamps();
+    });
     }
 
     /**
