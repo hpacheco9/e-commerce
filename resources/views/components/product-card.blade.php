@@ -16,7 +16,12 @@
                         <h1 class="titulo-produto">{{ $medicamento->nome }}</h1>
                         <div class="preco">€ {{ number_format($medicamento->preco, 2, ',', '.') }}</div>
                     </div>
-                    <span class="etiqueta-stock">Em stock</span>
+                    @if ($medicamento->quantidade <= 0)
+                        <span class="etiqueta-stock">Esgotado</span>
+                    @else
+                        <span class="etiqueta-stock">Em stock</span>
+                    @endif
+
                 </div>
                 <div class="cartao-detalhes">
                     <div class="detalhe-item">
@@ -39,7 +44,7 @@
                     @csrf
                     <div class="seletor-quantidade">
                         <button id="decremento" class="botao-quantidade" onclick="alterarQuantidade(-1, event)">-</button>
-                        <input type="number" class="input-quantidade" id="quantidade" name="quantidade" value="1" min="1" max="100" inputmode="numeric">
+                        <input type="number" class="input-quantidade" id="quantidade" name="quantidade" value="1" min="1" inputmode="numeric">
                         <button class="botao-quantidade" onclick="alterarQuantidade(1, event)">+</button>
                     </div>
 
@@ -51,6 +56,10 @@
     </div>
     @if (session('success'))
         <div class="alerta" id="alerta">{{ session('success') }}</div>
+    @endif
+
+    @if (session('error'))
+        <div class="alerta" id="alerta" style="background-color: red; color: white">{{ session('error') }}</div>
     @endif
 
 </div>
@@ -81,6 +90,18 @@
     alerta.style.transform = 'translateY(-20px)';
     setTimeout(() => alerta.remove(), 300);
     }, 1500);}
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('input[name="quantidade"]').forEach(input => {
+            input.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    input.closest('form').submit();
+                }
+            });
+
+        });
     });
 
 </script>

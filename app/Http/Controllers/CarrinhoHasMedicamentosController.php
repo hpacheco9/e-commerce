@@ -20,11 +20,15 @@ class CarrinhoHasMedicamentosController extends Controller
         $quantidade = $request['quantidade'];
 
 
-        CarrinhoHasMedicamento::updateOrCreateByCompositeKey(
+        $validate = CarrinhoHasMedicamento::updateOrCreateByCompositeKey(
             $userEmail,
             $referencia,
             $quantidade
         );
+
+        if (!$validate) {
+            return redirect()->back()->with('error', 'Quantidade indisponível');
+        }
 
         return redirect()->back()->with('success', 'Item adicionado ao carrinho com sucesso');
     }
@@ -46,13 +50,18 @@ class CarrinhoHasMedicamentosController extends Controller
         }
 
 
-        CarrinhoHasMedicamento::updateOrCreateByCompositeKey(
+        $validate = CarrinhoHasMedicamento::updateOrCreateByCompositeKey(
             Auth::user()->email,
             $referencia,
             $quantidadeCarrinho
         );
 
-        return redirect()->back();
+        if (!$validate) {
+            return redirect()->back()->with('error', 'Quantidade indisponível');
+        } else{
+            return redirect()->back();
+        }
+
     }
 
 

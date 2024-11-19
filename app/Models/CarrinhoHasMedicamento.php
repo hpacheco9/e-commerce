@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+
 class CarrinhoHasMedicamento extends Model
 
 {
@@ -37,7 +38,14 @@ class CarrinhoHasMedicamento extends Model
             ->where('medicamento_referencia', $medicamentoReferencia)
             ->first();
 
+        $medicamento = Medicamento::where('referencia', $medicamentoReferencia)->first();
+
+        if ($quantidade > $medicamento->quantidade) {
+            return False;
+        }
+
         if ($record) {
+
             DB::table('carrinho_has_medicamentos')
                 ->where('user_email', $userEmail)
                 ->where('medicamento_referencia', $medicamentoReferencia)
@@ -49,6 +57,7 @@ class CarrinhoHasMedicamento extends Model
                 'quantidade' => $quantidade,
             ]);
         }
+        return True;
     }
 
     public static function deleteByCompositeKey($userEmail, $medicamentoReferencia)
