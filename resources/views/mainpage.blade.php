@@ -37,7 +37,23 @@
             @endif
         </div>
 
+    @if (session('success'))
+        <div class="alerta" id="alerta">{{ session('success') }}</div>
+    @endif
 @endsection
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const alerta = document.getElementById("alerta");
+        if (alerta) {
+            setTimeout(() => {
+                alerta.style.opacity = '0';
+                alerta.style.transform = 'translateY(-20px)';
+                setTimeout(() => alerta.remove(), 300);
+            }, 1500);
+        }
+    });
+</script>
 
 <style>
     .container {
@@ -122,6 +138,35 @@
     .button:focus::after {
         transform: none;
         background-color: rgba(53, 161, 168, 0.75);
+    }
+    .alerta {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        transform: translateY(0);
+        max-width: 300px;
+        width: 90%;
+        background-color: #e3f5f7;
+        color: #149FA8;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        transition: visibility 0.3s, opacity 0.3s, transform 0.3s;
+
+
+        z-index: 1000;
+    }
+
+
+
+    @media (max-width: 600px) {
+        .alerta {
+            top: 1rem;
+            right: 1rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.875rem;
+        }
     }
 
 </style>

@@ -44,12 +44,15 @@
                     </div>
 
 
-                    <button class="botao-comprar" type="submit" onclick="comprarProduto()">Comprar agora</button>
+                    <button class="botao-comprar" type="submit">Comprar agora</button>
                 </form>
             </div>
         </div>
     </div>
-    <div class="alerta" id="alerta">Produto adicionado com sucesso!</div>
+    @if (session('success'))
+        <div class="alerta" id="alerta">{{ session('success') }}</div>
+    @endif
+
 </div>
 
 <script>
@@ -70,15 +73,16 @@
         inputQuantidade.value = novaQuantidade;
     }
 
+    document.addEventListener("DOMContentLoaded", function () {
+    const alerta = document.getElementById("alerta");
+    if (alerta) {
+    setTimeout(() => {
+    alerta.style.opacity = '0';
+    alerta.style.transform = 'translateY(-20px)';
+    setTimeout(() => alerta.remove(), 300);
+    }, 1500);}
+    });
 
-    function comprarProduto() {
-        let alerta = document.getElementById('alerta');
-        alerta.classList.add('show');
-
-        setTimeout(() => {
-            alerta.classList.remove('show');
-        }, 3000);
-    }
 </script>
 
 <style>
@@ -243,7 +247,7 @@
         position: fixed;
         top: 2rem;
         right: 2rem;
-        transform: translateY(-100%);
+        transform: translateY(0);
         max-width: 300px;
         width: 90%;
         background-color: #e3f5f7;
@@ -251,15 +255,11 @@
         padding: 1rem 2rem;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-out, opacity 0.3s ease;
-        opacity: 0;
+        transition: visibility 0.3s, opacity 0.3s, transform 0.3s;
         z-index: 1000;
     }
 
-    .alerta.show {
-        transform: translateY(0);
-        opacity: 1;
-    }
+
 
     @media (max-width: 600px) {
         .alerta {

@@ -34,10 +34,13 @@
                     Adicionar ao carrinho
                 </button>
             </form>
-
         </div>
     </div>
 </div>
+
+
+
+
 
 <style>
     .card {
@@ -159,5 +162,32 @@
     .price-unit.in-stock {
         color: #00FF00;
         margin-left: 29.99%;
+    }
+
+    .alerta {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        transform: translateY(0);
+        max-width: 300px;
+        width: 90%;
+        background-color: #e3f5f7;
+        color: #149FA8;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: visibility 0.3s, opacity 0.3s, transform 0.3s;
+        z-index: 0;
+    }
+
+
+
+    @media (max-width: 600px) {
+        .alerta {
+            top: 1rem;
+            right: 1rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.875rem;
+        }
     }
 </style>

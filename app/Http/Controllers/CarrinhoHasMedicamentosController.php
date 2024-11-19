@@ -26,7 +26,7 @@ class CarrinhoHasMedicamentosController extends Controller
             $quantidade
         );
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Item adicionado ao carrinho com sucesso');
     }
 
     public function updateQuantity(Request $request)

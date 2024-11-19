@@ -18,7 +18,8 @@
                     <div class="row main align-items-center">
                         <div class="col-2"><img class="img-fluid" src="/images/{{$item['medicamento']->imagem}}"></div>
                         <div class="col">
-                            <div class="row text-muted">{{$item['medicamento']->nome}}</div>
+                            <div>{{$item['medicamento']->nome}}</div>
+                            <div class="row text-muted" style="font-size: small">&euro; {{$item['medicamento']->preco}} / unidade</div>
                             <div class="row"></div>
                         </div>
                         <div class="col">
@@ -237,6 +238,6 @@
         -webkit-appearance: none;
         margin: 0;
     }
-    
+
 </style>
 
