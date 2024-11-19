@@ -34,10 +34,13 @@
                     Adicionar ao carrinho
                 </button>
             </form>
-
         </div>
     </div>
 </div>
+
+
+
+
 
 <style>
     .card {
@@ -160,4 +163,5 @@
         color: #00FF00;
         margin-left: 29.99%;
     }
+
 </style>

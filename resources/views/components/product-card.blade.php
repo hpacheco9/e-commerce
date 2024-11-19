@@ -16,7 +16,12 @@
                         <h1 class="titulo-produto">{{ $medicamento->nome }}</h1>
                         <div class="preco">€ {{ number_format($medicamento->preco, 2, ',', '.') }}</div>
                     </div>
-                    <span class="etiqueta-stock">Em stock</span>
+                    @if ($medicamento->quantidade <= 0)
+                        <span class="etiqueta-stock">Esgotado</span>
+                    @else
+                        <span class="etiqueta-stock">Em stock</span>
+                    @endif
+
                 </div>
                 <div class="cartao-detalhes">
                     <div class="detalhe-item">
@@ -39,17 +44,24 @@
                     @csrf
                     <div class="seletor-quantidade">
                         <button id="decremento" class="botao-quantidade" onclick="alterarQuantidade(-1, event)">-</button>
-                        <input type="number" class="input-quantidade" id="quantidade" name="quantidade" value="1" min="1" max="100" inputmode="numeric">
+                        <input type="number" class="input-quantidade" id="quantidade" name="quantidade" value="1" min="1" inputmode="numeric">
                         <button class="botao-quantidade" onclick="alterarQuantidade(1, event)">+</button>
                     </div>
 
 
-                    <button class="botao-comprar" type="submit" onclick="comprarProduto()">Comprar agora</button>
+                    <button class="botao-comprar" type="submit">Comprar agora</button>
                 </form>
             </div>
         </div>
     </div>
-    <div class="alerta" id="alerta">Produto adicionado com sucesso!</div>
+    @if (session('success'))
+        <div class="alerta" id="alerta">{{ session('success') }}</div>
+    @endif
+
+    @if (session('error'))
+        <div class="alerta" id="alerta" style="background-color: red; color: white">{{ session('error') }}</div>
+    @endif
+
 </div>
 
 <script>
@@ -70,15 +82,28 @@
         inputQuantidade.value = novaQuantidade;
     }
 
+    document.addEventListener("DOMContentLoaded", function () {
+    const alerta = document.getElementById("alerta");
+    if (alerta) {
+    setTimeout(() => {
+    alerta.style.opacity = '0';
+    alerta.style.transform = 'translateY(-20px)';
+    setTimeout(() => alerta.remove(), 300);
+    }, 1500);}
+    });
 
-    function comprarProduto() {
-        let alerta = document.getElementById('alerta');
-        alerta.classList.add('show');
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('input[name="quantidade"]').forEach(input => {
+            input.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    input.closest('form').submit();
+                }
+            });
 
-        setTimeout(() => {
-            alerta.classList.remove('show');
-        }, 3000);
-    }
+        });
+    });
+
 </script>
 
 <style>
@@ -243,7 +268,7 @@
         position: fixed;
         top: 2rem;
         right: 2rem;
-        transform: translateY(-100%);
+        transform: translateY(0);
         max-width: 300px;
         width: 90%;
         background-color: #e3f5f7;
@@ -251,15 +276,11 @@
         padding: 1rem 2rem;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-out, opacity 0.3s ease;
-        opacity: 0;
+        transition: visibility 0.3s, opacity 0.3s, transform 0.3s;
         z-index: 1000;
     }
 
-    .alerta.show {
-        transform: translateY(0);
-        opacity: 1;
-    }
+
 
     @media (max-width: 600px) {
         .alerta {
