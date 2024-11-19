@@ -179,6 +179,25 @@
         </div>
     </div>
 
+    <div class="pagination-controls">
+        @if(count($medicamentos) > 0)
+            @if($page > 1)
+                <a class="button" href="?page={{ $page - 1 }}&search={{ $search }}">Anterior</a>
+            @endif
+
+            @for($i = $start; $i <= $end; $i++)
+                @if($i == $page)
+                    <span class="button active">{{ $i }}</span>
+                @else
+                    <a class="button" href="?page={{ $i }}&search={{ $search }}">{{ $i }}</a>
+                @endif
+            @endfor
+
+            @if($hasMore)
+                <a class="button" href="?page={{ $page + 1 }}&search={{ $search }}">Avançar</a>
+            @endif
+        @endif
+    </div>
 
 @endsection
 
@@ -208,6 +227,39 @@
 </script>
 
 <style>
+    .pagination-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        gap: 10px;
+    }
+
+    .pagination-controls .button {
+        color: black;
+        text-decoration: none;
+        padding: 0.75em 1em;
+        border: 1px solid transparent;
+        border-radius: 50px;
+    }
+    .pagination-controls .button:hover {
+        background-color: black;
+        color: white;
+    }
+
+    .button {
+        display: flex;
+        z-index: 1;
+        overflow: hidden;
+        text-decoration: none;
+        font-family: sans-serif;
+        font-weight: 600;
+        font-size: 1em;
+        padding: 0.75em 1em;
+        margin: 0;
+        position: relative;
+    }
 
     .d-flex {
         display: flex;
