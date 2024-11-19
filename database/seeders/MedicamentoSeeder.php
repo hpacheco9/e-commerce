@@ -16,7 +16,7 @@ class MedicamentoSeeder extends Seeder
      */
     public function run(): void
     {
-        Medicamento::factory()->count(200)->create();
+        // Medicamento::factory()->count(200)->create();
 
         DB::table('medicamentos')->insert([
             [
