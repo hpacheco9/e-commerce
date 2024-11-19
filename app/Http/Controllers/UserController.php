@@ -76,15 +76,24 @@ class UserController extends Controller
             $filename = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
 
             try {
+                if ($user->image) {
+                    $previousFilePath = public_path('images/user_images/' . $user->image);
+                    if (file_exists($previousFilePath)) {
+                        unlink($previousFilePath);
+                    }
+                }
 
                 $request->file('profile_picture')->move(public_path('images/user_images'), $filename);
-                $user->image =  $filename;
 
+                $user->image = $filename;
+
+                $user->save();
             } catch (\Exception $e) {
                 \Log::error('File upload failed: ' . $e->getMessage());
                 return back()->with('error', 'File upload failed.');
             }
         }
+
 
 
 
