@@ -24,7 +24,6 @@ class MedicamentoController extends Controller
 
         $offset = ($page - 1) * $limit;
 
-        // Get paginated results
         if ($search) {
             $medicamentos = Medicamento::where('nome', 'like', $search . '%')
                 ->skip($offset)
@@ -58,7 +57,6 @@ class MedicamentoController extends Controller
     {
 
         Medicamento::where('referencia', $referencia)->delete();
-
         return redirect("/dashboard");
     }
 
