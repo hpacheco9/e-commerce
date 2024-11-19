@@ -38,6 +38,9 @@
     @if (session('success'))
         <div class="alerta" id="alerta">{{ session('success') }}</div>
     @endif
+    @if (session('error'))
+        <div class="alerta" id="alerta" style="background-color: red; color: white">{{ session('error') }}</div>
+    @endif
 @endsection
 
 <script>

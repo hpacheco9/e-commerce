@@ -97,12 +97,15 @@
             input.addEventListener('keypress', (event) => {
                 if (event.key === 'Enter') {
                     event.preventDefault();
+                    if (input.value === '0' || input.value.trim() === '') {
+                        input.value = '1';
+                    }
                     input.closest('form').submit();
                 }
             });
-
         });
     });
+
 
 </script>
 
