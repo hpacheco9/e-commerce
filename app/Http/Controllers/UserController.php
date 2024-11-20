@@ -105,6 +105,7 @@ class UserController extends Controller
 
 
         if ($request->hasFile('profile_picture')) {
+            $this->removerPhoto();
             $filename = $request->file('profile_picture')->getClientOriginalName();
             try {
                 $folderPath = public_path('images/user_images/' . $this->user->name);
