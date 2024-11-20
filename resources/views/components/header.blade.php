@@ -26,8 +26,8 @@
                             {{ Auth::user()->name }}
                         </button>
                         <div class="dropdown-content" id="userDropdown">
-                            <a href="/logout">Logout</a>
                             <a href="/perfil">Perfil</a>
+                            <a href="/logout">Logout</a>
                         </div>
                     </div>
                 </nav>

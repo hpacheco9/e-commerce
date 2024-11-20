@@ -78,9 +78,36 @@
             <button class="btn">CHECKOUT</button>
         </div>
     </div>
-
 </div>
 
+@if (session('error'))
+    <div class="alerta" id="alerta" style="background-color: red; color: white">{{ session('error') }}</div>
+@endif
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('input[name="quantidade"]').forEach(input => {
+            input.addEventListener('keypress', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    input.closest('form').submit();
+                }
+            });
+
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const alerta = document.getElementById("alerta");
+        if (alerta) {
+            setTimeout(() => {
+                alerta.style.opacity = '0';
+                alerta.style.transform = 'translateY(-20px)';
+                setTimeout(() => alerta.remove(), 300);
+            }, 1500);}
+    });
+</script>
 
 <style>
     body {
@@ -238,6 +265,34 @@
         -webkit-appearance: none;
         margin: 0;
     }
+
+    .alerta {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        transform: translateY(0);
+        max-width: 300px;
+        width: 90%;
+        background-color: #e3f5f7;
+        color: #149FA8;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: visibility 0.3s, opacity 0.3s, transform 0.3s;
+        z-index: 1000;
+    }
+
+
+
+    @media (max-width: 600px) {
+        .alerta {
+            top: 1rem;
+            right: 1rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.875rem;
+        }
+    }
+
 
 </style>
 

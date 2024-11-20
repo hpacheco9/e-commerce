@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -35,13 +36,14 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
-            'nif' => 'required|digits:9',
+            'nif' => 'required|digits:9|unique:users,nif',
             'rua' => 'required|string',
             'codigoPostal' => 'required|string',
             'porta' => 'required|string'
         ], [
             'email.unique' => 'Este email já está a ser utilizado.',
             'password.min' => 'A password deve ter pelo menos 8 caracteres.',
+            'nif.unique' => 'Este NIF já está a ser utilizado.'
         ]);
 
         try {
@@ -57,6 +59,55 @@ class UserController extends Controller
         }
     }
 
+    public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'nif' => 'required|string|max:15',
+            'rua' => 'nullable|string|max:255',
+            'codigo_postal' => 'nullable|string|max:15',
+            'porta' => 'nullable|string|max:10',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $user = auth()->user();
+
+        if ($request->hasFile('profile_picture')) {
+            $filename = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
+
+            try {
+                if ($user->image) {
+                    $previousFilePath = public_path('images/user_images/' . $user->image);
+                    if (file_exists($previousFilePath)) {
+                        unlink($previousFilePath);
+                    }
+                }
+
+                $request->file('profile_picture')->move(public_path('images/user_images'), $filename);
+
+                $user->image = $filename;
+
+                $user->save();
+            } catch (\Exception $e) {
+                \Log::error('File upload failed: ' . $e->getMessage());
+                return back()->with('error', 'File upload failed.');
+            }
+        }
+
+
+
+
+        $user->email = $validated['email'];
+        $user->nif = $validated['nif'];
+        $user->rua = $validated['rua'] ?? $user->rua;
+        $user->codigoPostal = $validated['codigo_postal'] ?? $user->codigo_postal;
+        $user->porta = $validated['porta'] ?? $user->porta;
+
+        $user->save();
+
+
+        return redirect()->back()->with('success', 'Profile updated successfully!');
+    }
 
     public function logout(Request $request)
     {
@@ -66,5 +117,10 @@ class UserController extends Controller
         $request->session()->flush();
 
         return redirect("/");
+    }
+
+    public function show()
+    {
+        return view('perfil');
     }
 }

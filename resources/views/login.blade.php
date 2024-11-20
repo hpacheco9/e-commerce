@@ -193,7 +193,8 @@
                 <label for="password">Password</label>
                 <div class="password-container">
                     <input type="password" id="password" name="password" placeholder="Introduza a sua password" required>
-                    <i class="fas fa-eye toggle-password"></i>
+                    <i class="fas fa-eye-slash toggle-password"></i>
+
                 </div>
                 <div class="error-message">
                     <?php
@@ -216,8 +217,8 @@
     togglePassword.addEventListener('click', () => {
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
         passwordInput.setAttribute('type', type);
-        togglePassword.classList.toggle('fa-eye');
         togglePassword.classList.toggle('fa-eye-slash');
+        togglePassword.classList.toggle('fa-eye');
     });
 </script>
 </html>

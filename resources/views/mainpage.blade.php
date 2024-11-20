@@ -15,8 +15,6 @@
                 <h2>Não foram encontrados medicamentos</h2>
             </div>
         @endif
-
-
         <div class="pagination-controls">
             @if(count($medicamentos) > 0)
                 @if($page > 1)
@@ -39,6 +37,9 @@
 
     @if (session('success'))
         <div class="alerta" id="alerta">{{ session('success') }}</div>
+    @endif
+    @if (session('error'))
+        <div class="alerta" id="alerta" style="background-color: red; color: white">{{ session('error') }}</div>
     @endif
 @endsection
 

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'nif',
         'porta',
+        'image',
         'rua',
         'codigoPostal'
     ];

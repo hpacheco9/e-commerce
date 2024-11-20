@@ -59,3 +59,9 @@ Route::get('/carrinho/addOrCreate', [CarrinhoHasMedicamentosController::class, '
 
 Route::post('/cart/update', [CarrinhoHasMedicamentosController::class, 'updateQuantity'])->name('cart.update')->middleware('auth');
 Route::post('/cart/remove', [CarrinhoHasMedicamentosController::class, 'removeItem'])->name('cart.remove')->middleware('auth');
+
+
+// Perfil
+
+Route::get("/perfil", [UserController::class, 'show'])->name('perfil.show')->middleware('auth');
+Route::put("/perfil/update", [UserController::class, 'update'])->name('perfil.update')->middleware('auth');
