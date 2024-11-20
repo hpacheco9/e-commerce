@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Recuperar Password</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <style>
@@ -194,53 +194,21 @@
         <img src="/images/medivitta-high-resolution-logo.png" alt="Medivitta Logo">
     </div>
     <div class="right-column">
-        <h2>Login</h2>
-        <form method="post" action="/login">
+        <h2>Recuperar password</h2>
+        <form method="post" action="/forgot">
             {{ csrf_field()  }}
             <div class="input-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Introduza o seu email" required>
-                <div class="error-message">
-                    <?php
-                    if (isset($errors) && $errors->has('email')) {
-                        echo $errors->first('email');
-                    }
-                    ?>
-                </div>
+                @error('email')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
             </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <div class="password-container">
-                    <input type="password" id="password" name="password" placeholder="Introduza a sua password" required>
-                    <i class="fas fa-eye-slash toggle-password"></i>
-
-                </div>
-
-
-                <div class="error-message">
-                    <?php
-                    if (isset($errors) && $errors->has('password')) {
-                        echo $errors->first('password');
-                    }
-                    ?>
-                </div>
-                <p id="forgot"><a href="/forgot">Esqueceu-se da password?</a></p>
-            </div>
-            <button type="submit">Entrar</button>
+            <button type="submit">Enviar</button>
         </form>
-        <p id="no-account">Não tens uma conta? <a href="/register">Criar</a></p>
+        <p id="no-account">Já tens conta? <a href="/login">Login</a></p>
     </div>
 </div>
 </body>
-<script>
-    const togglePassword = document.querySelector('.toggle-password');
-    const passwordInput = document.getElementById('password');
-
-    togglePassword.addEventListener('click', () => {
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        togglePassword.classList.toggle('fa-eye-slash');
-        togglePassword.classList.toggle('fa-eye');
-    });
-</script>
 </html>
+

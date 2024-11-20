@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = auth()->user();
+    }
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -59,6 +66,32 @@ class UserController extends Controller
         }
     }
 
+    public function forgot(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email'
+        ], [
+            'email.exists' => 'Este email não está registado.'
+        ]);
+
+        return redirect("/");
+    }
+
+    function removerPhoto()
+    {
+        $previousFilePath = public_path('images/user_images/' . $this->user->image);
+        if (file_exists($previousFilePath) && $this->user->image != 'default.png') {
+            unlink($previousFilePath);
+        }
+    }
+
+    public function deletePhoto()
+    {
+        $this->removerPhoto();
+        $this->user->image = 'default.png';
+        $this->user->save();
+        return redirect()->back()->with('success', 'Profile picture deleted successfully!');
+    }
     public function update(Request $request)
     {
         $validated = $request->validate([
@@ -70,40 +103,32 @@ class UserController extends Controller
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $user = auth()->user();
 
         if ($request->hasFile('profile_picture')) {
-            $filename = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
-
+            $filename = $request->file('profile_picture')->getClientOriginalName();
             try {
-                if ($user->image) {
-                    $previousFilePath = public_path('images/user_images/' . $user->image);
-                    if (file_exists($previousFilePath)) {
-                        unlink($previousFilePath);
-                    }
+                $folderPath = public_path('images/user_images/' . $this->user->name);
+                if (!file_exists($folderPath)) {
+                    mkdir($folderPath, 0775, true);
                 }
-
-                $request->file('profile_picture')->move(public_path('images/user_images'), $filename);
-
-                $user->image = $filename;
-
-                $user->save();
+                $previousFilePath = public_path('images/user_images/' . $this->user->name . "/" . $this->user->image);
+                if (!file_exists($previousFilePath)) {
+                    $request->file('profile_picture')->move(public_path('images/user_images/' . $this->user->name), $filename);
+                   $this->user->image = $this->user-> name . '/' . $filename;
+                } else {
+                    $this->user->image = $filename;
+                }
             } catch (\Exception $e) {
-                \Log::error('File upload failed: ' . $e->getMessage());
-                return back()->with('error', 'File upload failed.');
+                return back()->with('error', 'File upload failed: ' . $e->getMessage());
             }
+
         }
-
-
-
-
-        $user->email = $validated['email'];
-        $user->nif = $validated['nif'];
-        $user->rua = $validated['rua'] ?? $user->rua;
-        $user->codigoPostal = $validated['codigo_postal'] ?? $user->codigo_postal;
-        $user->porta = $validated['porta'] ?? $user->porta;
-
-        $user->save();
+        $this->user->email = $validated['email'];
+        $this->user->nif = $validated['nif'];
+        $this->user->rua = $validated['rua'] ?? $this->user->rua;
+        $this->user->codigoPostal = $validated['codigo_postal'] ?? $this->user->codigoPostal;
+        $this->user->porta = $validated['porta'] ?? $this->user->porta;
+        $this->user->save();
 
 
         return redirect()->back()->with('success', 'Profile updated successfully!');

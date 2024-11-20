@@ -65,3 +65,10 @@ Route::post('/cart/remove', [CarrinhoHasMedicamentosController::class, 'removeIt
 
 Route::get("/perfil", [UserController::class, 'show'])->name('perfil.show')->middleware('auth');
 Route::put("/perfil/update", [UserController::class, 'update'])->name('perfil.update')->middleware('auth');
+Route::post("/perfil/delete_foto", [UserController::class, 'deletePhoto'])->middleware('auth');
+
+// Password
+Route::get("/forgot", function () {
+    return view('forgot');
+});
+Route::post("/forgot", [UserController::class, 'forgot']);
