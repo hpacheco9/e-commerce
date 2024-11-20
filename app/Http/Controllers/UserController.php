@@ -113,7 +113,9 @@ class UserController extends Controller
                 }
                 $previousFilePath = public_path('images/user_images/' . $this->user->name . "/" . $this->user->image);
                 if (!file_exists($previousFilePath)) {
+
                     $request->file('profile_picture')->move(public_path('images/user_images/' . $this->user->name), $filename);
+
                    $this->user->image = $this->user-> name . '/' . $filename;
                 } else {
                     $this->user->image = $filename;

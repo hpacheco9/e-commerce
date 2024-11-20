@@ -32,7 +32,7 @@ class UserFactory extends Factory
             'rua' => $this->faker->streetAddress,
             'codigoPostal' => $this->faker->postcode,
             'porta' => $this->faker->buildingNumber,
-            'image' => 'default.jpg',
+            'image' => 'default.png',
             'email_verified_at' => $this->faker->optional()->dateTime,
             'remember_token' => Str::random(10),
             'created_at' => now(),
