@@ -134,6 +134,7 @@
                                                     <label for="editReferencia" class="form-label">Referencia</label>
                                                     <input type="text" class="form-control" id="editReferencia" name="referencia" required>
                                                 </div>
+
                                                 <div class="mb-3">
                                                     <label for="editNome" class="form-label">Nome</label>
                                                     <input type="text" class="form-control" id="editNome" name="nome" required>
@@ -199,6 +200,14 @@
         @endif
     </div>
 
+    @error('referencia')
+        <div class="alerta-error" id="alerta">{{ $message }}</div>
+    @enderror
+
+    @if (session('success'))
+        <div class="alerta" id="alerta">{{ session('success') }}</div>
+    @endif
+
 @endsection
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -223,10 +232,65 @@
         var editModal = new bootstrap.Modal(document.getElementById('addMedicamentoModal'));
         editModal.show();
     }
-
+    document.addEventListener("DOMContentLoaded", function () {
+        const alerta = document.getElementById("alerta");
+        if (alerta) {
+            setTimeout(() => {
+                alerta.style.opacity = '0';
+                alerta.style.transform = 'translateY(-20px)';
+                setTimeout(() => alerta.remove(), 300);
+            }, 1500);
+        }
+    });
 </script>
 
 <style>
+
+.alerta {
+        flex: 1;
+        flex-direction: row;
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        transform: translateY(0);
+        max-width: 500px;
+        width: 95%;
+        background-color: #e3f5f7;
+        color: #149FA8;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: visibility 0.3s, opacity 0.3s, transform 0.3s;
+        z-index: 1000;
+
+    }
+    .alerta-error {
+        flex: 1;
+        flex-direction: row;
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        transform: translateY(0);
+        max-width: 500px;
+        width: 95%;
+        background-color: rgb(244, 168, 168);
+        color: red;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: visibility 0.3s, opacity 0.3s, transform 0.3s;
+        z-index: 1000;
+
+    }
+
+    @media (max-width: 800px) {
+        .alerta {
+            top: 1rem;
+            right: 1rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 0.875rem;
+        }
+    }
     .pagination-controls {
         display: flex;
         justify-content: center;

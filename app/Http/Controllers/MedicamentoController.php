@@ -83,19 +83,17 @@ class MedicamentoController extends Controller
         $medicamento->forma = $request->input('forma');
         $medicamento->descricao = $request->input('descricao');
         $medicamento->save();
-        return redirect('/dashboard');
+
+        return redirect()->back()->with('success', 'Medicamento atualizado com sucesso');
     }
 
     public function store(Request $request)
     {
-        $existingMedicamento = Medicamento::where('nome', $request->nome)
-            ->where('dosagem', $request->dosagem)
-            ->where('forma', $request->forma)
-            ->first();
-
-        if ($existingMedicamento) {
-            return back()->withErrors(['error' => 'A medicamento with this name, dosage, and form already exists.']);
-        }
+        $validade = $request->validate([
+            'referencia' => 'required|unique:medicamentos,referencia'
+        ], [
+            'referencia.unique' => 'Já existe um medicamento com esta referencia'
+        ]);
 
         $medicamento = new Medicamento();
         $medicamento->referencia = $request->referencia;
@@ -110,7 +108,7 @@ class MedicamentoController extends Controller
 
         $medicamento->save();
 
-        return redirect('/dashboard');
+        return redirect()->back()->with('success', 'Medicamento adicionado com sucesso');
     }
 
     public function show($referencia)
