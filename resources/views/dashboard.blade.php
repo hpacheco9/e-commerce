@@ -111,8 +111,8 @@
                                                     <input type="text" class="form-control" id="editForma" name="forma" required>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-primary">Salvar Mudanças</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -306,7 +306,13 @@
         padding: 0.75em 1em;
         border: 1px solid transparent;
         border-radius: 50px;
+        opacity: 0.5;
     }
+
+    .pagination-controls .button.active {
+        opacity: 1;
+    }
+
     .pagination-controls .button:hover {
         background-color: black;
         color: white;
