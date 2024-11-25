@@ -72,23 +72,22 @@
     }
 
     .card-image-container {
+        width: 288px;
+        height: 288px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100%;
-        height: 100%;
         overflow: hidden;
         background-color: white;
-
     }
 
     .card-image {
         width: 100%;
-        height: auto;
+        height: 100%;
         object-fit: cover;
         object-position: center;
-
     }
+
     .card-content-wrapper {
         display: flex;
         flex-direction: column;
@@ -98,7 +97,7 @@
     .card-content {
         padding: 16px;
         flex-grow: 1;
-        height: 80px;
+        height: 70px;
     }
 
     .carta-head {
@@ -117,6 +116,10 @@
         color: #666;
         margin: 0 0 12px 0;
         line-height: 1.4;
+        max-height: 60px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .card-price {

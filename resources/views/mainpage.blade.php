@@ -148,7 +148,9 @@
         transition: 4s;
         margin: 0;
         position: relative;
+        border-radius: 25%;
     }
+
     .button::before,
     .button::after {
         content: '';
