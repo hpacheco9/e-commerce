@@ -7,7 +7,6 @@
 
 @section('content')
     <div class="container">
-        <h1 class="mb-4">Medicamentos</h1>
         <div class="d-flex align-items-center mb-4">
             <div class="search-container me-3">
                 <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -303,7 +302,7 @@
     .pagination-controls .button {
         color: black;
         text-decoration: none;
-        padding: 0.75em 1em;
+        pading: 0.75em 1em;
         border: 1px solid transparent;
         border-radius: 50px;
         opacity: 0.5;
