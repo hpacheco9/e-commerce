@@ -8,13 +8,13 @@ use Illuminate\View\Component;
 
 class Header extends Component
 {
-    public string $title;
+    public string $search;
     /**
      * Create a new component instance.
      */
-    public function __construct(string $title)
+    public function __construct(string $title, string $search)
     {
-        $this->title = $title;
+        $this->search =  $search;
     }
 
     /**

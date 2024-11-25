@@ -8,7 +8,7 @@
 <body style="display: flex; flex-direction: column; min-height: 100vh; margin: 0; overflow-x:hidden;">
 
 
-<x-header title="HELLO"/>
+<x-header :search="$search ?? ''" />
 
 
 <main style="flex: 1;">

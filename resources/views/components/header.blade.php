@@ -7,7 +7,7 @@
         <div class="search-container">
             <form action="/medicamentos" method="GET">
                 {{csrf_field()}}
-                <input id="search-bar" type="search" name="search" placeholder="Pesquisar">
+                <input id="search-bar" type="search" name="search" placeholder="Pesquisar" value="@isset($search){{ $search }}@endisset">
                 <img src="/images/search-icon.svg" alt="Search" class="search-icon">
             </form>
         </div>
