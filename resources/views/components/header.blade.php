@@ -19,24 +19,21 @@
                 <nav>
                     <div class="user-dropdown">
                         <button class="user-name" onclick="toggleDropdown()" aria-haspopup="true" aria-expanded="false">
-                            <svg class="user-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                            {{ Auth::user()->name }}
+                            @if(Auth::user()->image)
+                                <img src="images/user_images/{{ Auth::user()->image }}" alt="User Image" class="user-avatar">
+                                {{ Auth::user()->name }}
+                            @endif
+
                         </button>
                         <div class="dropdown-content" id="userDropdown">
                             <a href="/perfil">Perfil</a>
                             <a href="/logout">Logout</a>
                         </div>
                     </div>
+
                 </nav>
                     <a href="/carrinho" class="cart-link">
-                        <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <circle cx="9" cy="21" r="1"></circle>
-                            <circle cx="20" cy="21" r="1"></circle>
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                        </svg>
+                       <img src="images/shopping-cart.png" width="25px">
                     </a>
             @endauth
 
@@ -154,6 +151,15 @@
     .user-dropdown {
         position: relative;
     }
+    .user-avatar {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 0.5rem;
+    }
+
+
 
     .user-name {
         display: flex;
@@ -173,11 +179,7 @@
         background-color: #f3f4f6;
     }
 
-    .user-icon {
-        width: 2rem;
-        height: 2rem;
-        margin-right: 0.5rem;
-    }
+
 
     .dropdown-content {
         visibility: hidden;
