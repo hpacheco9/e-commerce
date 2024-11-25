@@ -12,7 +12,7 @@ class Header extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(string $title, string $search)
+    public function __construct( string $search)
     {
         $this->search =  $search;
     }
