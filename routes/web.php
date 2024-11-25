@@ -60,6 +60,11 @@ Route::get('/carrinho/addOrCreate', [CarrinhoHasMedicamentosController::class, '
 Route::post('/cart/update', [CarrinhoHasMedicamentosController::class, 'updateQuantity'])->name('cart.update')->middleware('auth');
 Route::post('/cart/remove', [CarrinhoHasMedicamentosController::class, 'removeItem'])->name('cart.remove')->middleware('auth');
 
+// Checkout
+
+Route::get('checkout', function () {
+    return view('checkout');
+});
 
 // Perfil
 
