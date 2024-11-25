@@ -7,6 +7,10 @@
 </head>
 <body>
 
+
+<x-dashboard-header />
+
+
 @yield('content')
 
 </body>
