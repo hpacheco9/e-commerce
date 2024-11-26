@@ -75,7 +75,7 @@ class CarrinhoHasMedicamentosController extends Controller
         return redirect()->back();
     }
 
-    public function index() {
+    public function index(string $view) {
 
         $carrinho = CarrinhoHasMedicamento::where('user_email', Auth::user()->email)->get();
 
@@ -93,9 +93,7 @@ class CarrinhoHasMedicamentosController extends Controller
             }
         }
 
-
-
-        return view('checkout', [
+        return view($view, [
             'items' => $items,
             'total' => $total
         ]);

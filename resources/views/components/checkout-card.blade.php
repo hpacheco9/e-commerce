@@ -1,7 +1,7 @@
 <div class="container">
     <div class="checkout-grid">
         <div class="card">
-            <a href="/" style="text-decoration: none"><img style="transform: rotate(-0.50turn);" src="images/arrow-right.png"></a>
+            <a href="/carrinho" style="text-decoration: none"><img style="transform: rotate(-0.50turn);" src="images/arrow-right.png"></a>
             <h2 class="header2">Detalhes de Faturação</h2>
             <form>
                 <div class="form-group">
@@ -67,14 +67,14 @@
             </div>
             <div class="order-total">
                 <div class="order-total-row">
-                    <span>Subtotal</span>
+                    <span style="opacity: 0.5">Subtotal</span>
                     <span style="opacity: 0.5">€ {{ $total }}</span>
                 </div>
                 <div class="order-total-row final">
                     <span>Total a pagar</span>
                     <span>€ {{ $total }}</span>
                 </div>
-                <button class="btn">Pagar {{$total}}€</button>
+                <button class="btn">Efetuar Pagamento</button>
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@
     }
 
     .product-list {
-        max-height: 300px;
+        max-height: 250px;
         overflow-y: auto;
         margin-bottom: 20px;
         padding-right: 20px;

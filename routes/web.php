@@ -49,7 +49,9 @@ Route::get('dashboard', function () {
 
 // Carrinho
 
-Route::get('/carrinho' , [CarrinhoHasMedicamentosController::class, 'index'])->name('carrinho.index')->middleware('auth');
+Route::get('/carrinho', function () {
+    return (new CarrinhoHasMedicamentosController)->index('cart');
+})->middleware('auth')->name('carrinho.index');
 
 Route::post('carrinho/{referencia}', [CarrinhoController::class, 'add'])
     ->name('carrinho.add')
@@ -62,7 +64,9 @@ Route::post('/cart/remove', [CarrinhoHasMedicamentosController::class, 'removeIt
 
 // Checkout
 
-Route::get('checkout', [CarrinhoHasMedicamentosController::class, 'index'])->name('checkout.index')->middleware('auth');
+Route::get('checkout', function () {
+    return (new CarrinhoHasMedicamentosController)->index('checkout');
+})->middleware('auth')->name('checkout.index');
 
 // Perfil
 

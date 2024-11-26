@@ -75,7 +75,7 @@
                 <div class="col">TOTAL</div>
                 <div class="col text-right">&euro; {{$total + 5}}</div>
             </div>
-            <button class="btn">CHECKOUT</button>
+            <a href="checkout" class="btn">CHECKOUT</a>
         </div>
     </div>
 </div>
