@@ -54,27 +54,28 @@
         </div>
         <div class="card">
             <h2>Resumo do Pedido</h2>
-
-            @foreach($items as $item)
-                <div class="product-item">
-                    <div class="product-details">
-                        <h3>{{ $item['medicamento']->nome }}</h3>
-                        <span class="product-quantity">{{ $item['quantidade'] }} x € {{ $item['medicamento']->preco }}</span>
-                    </div>
-                    <span class="product-price">€ {{ $item['quantidade'] * $item['medicamento']->preco }}</span>
-                </div>
-            @endforeach
-
+            <div class="product-list">
+                    @foreach($items as $item)
+                        <div class="product-item">
+                            <div class="product-details">
+                                <h3>{{ $item['medicamento']->nome }}</h3>
+                                <span class="product-quantity">{{ $item['quantidade'] }} x € {{ $item['medicamento']->preco }}</span>
+                            </div>
+                            <span class="product-price">€ {{ $item['quantidade'] * $item['medicamento']->preco }}</span>
+                        </div>
+                    @endforeach
+            </div>
             <div class="order-total">
                 <div class="order-total-row">
-                    <span > Subtotal</span>
+                    <span>Subtotal</span>
                     <span style="opacity: 0.5">€ {{ $total }}</span>
                 </div>
                 <div class="order-total-row final">
                     <span>Total a pagar</span>
                     <span>€ {{ $total }}</span>
                 </div>
-            <button class="btn">Finalizar Compra</button>
+                <button class="btn">Pagar {{$total}}€</button>
+            </div>
         </div>
     </div>
 </div>
@@ -89,6 +90,32 @@
         --text-color: #1f2937;
         --text-muted: #6b7280;
         --border-color: #e5e7eb;
+    }
+
+    .product-list {
+        max-height: 300px;
+        overflow-y: auto;
+        margin-bottom: 20px;
+        padding-right: 20px;
+    }
+
+    .product-list::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .product-list::-webkit-scrollbar-track {
+        background: #f3f4f6;
+        border-radius: 4px;
+    }
+
+    .product-list::-webkit-scrollbar-thumb {
+        background-color: var(--primary-color);
+        border-radius: 4px;
+        border: 2px solid #ffffff;
+    }
+
+    .product-list::-webkit-scrollbar-thumb:hover {
+        background-color: var(--primary-hover);
     }
 
     * {
