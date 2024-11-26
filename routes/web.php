@@ -62,9 +62,7 @@ Route::post('/cart/remove', [CarrinhoHasMedicamentosController::class, 'removeIt
 
 // Checkout
 
-Route::get('checkout', function () {
-    return view('checkout');
-});
+Route::get('checkout', [CarrinhoHasMedicamentosController::class, 'index'])->name('checkout.index')->middleware('auth');
 
 // Perfil
 

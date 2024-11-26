@@ -95,7 +95,7 @@ class CarrinhoHasMedicamentosController extends Controller
 
 
 
-        return view('cart', [
+        return view('checkout', [
             'items' => $items,
             'total' => $total
         ]);
