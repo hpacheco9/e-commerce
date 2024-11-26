@@ -11,29 +11,25 @@ class MedicamentoController extends Controller
     {
         $page = max(1, $request->input('page', 1));
         $search = $request->input('search');
+        $maxPrice = $request->input('price');
+
+        $query = Medicamento::query();
 
         if ($search) {
-            $totalMedicamentos = Medicamento::where('nome', 'like', $search . '%')->count();
-        } else {
-            $totalMedicamentos = Medicamento::count();
+            $query->where('nome', 'like', $search . '%');
         }
+
+        if ($maxPrice) {
+            $query->where('preco', '<=', $maxPrice);
+        }
+
+        $totalMedicamentos = $query->count();
 
         $totalPages = max(1, ceil($totalMedicamentos / $limit));
-
         $page = min($page, $totalPages);
-
         $offset = ($page - 1) * $limit;
 
-        if ($search) {
-            $medicamentos = Medicamento::where('nome', 'like', $search . '%')
-                ->skip($offset)
-                ->take($limit)
-                ->get();
-        } else {
-            $medicamentos = Medicamento::skip($offset)
-                ->take($limit)
-                ->get();
-        }
+        $medicamentos = $query->skip($offset)->take($limit)->get();
 
         $hasMore = ($page < $totalPages);
 
@@ -48,8 +44,11 @@ class MedicamentoController extends Controller
             'totalPages' => $totalPages,
             'search' => $search,
             'start' => $start,
+            'preco' => $maxPrice,
             'end' => $end,
         ]);
+
+
     }
 
 
@@ -87,7 +86,7 @@ class MedicamentoController extends Controller
 
     public function store(Request $request)
     {
-        $validade = $request->validate([
+        $request->validate([
             'referencia' => 'required|unique:medicamentos,referencia'
         ], [
             'referencia.unique' => 'Já existe um medicamento com esta referencia'

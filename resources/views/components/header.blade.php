@@ -23,14 +23,12 @@
                                 <img src="images/user_images/{{ Auth::user()->image }}" alt="User Image" class="user-avatar">
                                 {{ Auth::user()->name }}
                             @endif
-
                         </button>
                         <div class="dropdown-content" id="userDropdown">
                             <a href="/perfil">Perfil</a>
                             <a href="/logout">Logout</a>
                         </div>
                     </div>
-
                 </nav>
                     <a href="/carrinho" class="cart-link">
                        <img src="images/shopping-cart.png" width="25px">

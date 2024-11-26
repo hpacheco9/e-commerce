@@ -5,7 +5,12 @@
 @section('content')
     <div class="filter-container">
         <div class="filter-wrapper">
-            <select id="sortFilter" class="sort-filter">
+            <label for="priceRange" class="filter-label">Preço:</label>
+            <input type="range" id="priceRange" class="price-range" min="0" max="{{ $preco ?? '1000'}} " step="1" value="1000">
+            <span id="priceDisplay" class="price-display">0€ - 1000€</span>
+        </div>
+        <div class="filter-wrapper">
+            <select id="sortFilter" class="filter-select">
                 <option value="">Ordenar por</option>
                 <option value="price_asc">Preço: Menor para Maior</option>
                 <option value="price_desc">Preço: Maior para Menor</option>
@@ -20,6 +25,7 @@
                 </svg>
             </div>
         </div>
+
     </div>
 
     @if(count($medicamentos) > 0)
@@ -37,21 +43,22 @@
     <div class="pagination-controls">
         @if(count($medicamentos) > 0)
             @if($page > 1)
-                <a class="button" href="?page={{ $page - 1 }}&search={{ $search }}">Anterior</a>
+                <a class="button" href="?page={{ $page - 1 }}&search={{ $search }}&price={{ request('preco', 1000) }}">Anterior</a>
             @endif
 
             @for($i = $start; $i <= $end; $i++)
                 @if($i == $page)
                     <span class="button active">{{ $i }}</span>
                 @else
-                    <a class="button" href="?page={{ $i }}&search={{ $search }}">{{ $i }}</a>
+                    <a class="button" href="?page={{ $i }}&search={{ $search }}&price={{ request('price', 1000) }}">{{ $i }}</a>
                 @endif
             @endfor
 
             @if($hasMore)
-                <a class="button" href="?page={{ $page + 1 }}&search={{ $search }}">Avançar</a>
+                <a class="button" href="?page={{ $page + 1 }}&search={{ $search }}&price={{ request('price', 1000) }}">Avançar</a>
             @endif
         @endif
+
     </div>
 
     @if (session('success'))
@@ -64,48 +71,166 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const alerta = document.getElementById("alerta");
-        if (alerta) {
-            setTimeout(() => {
-                alerta.style.opacity = '0';
-                alerta.style.transform = 'translateY(-20px)';
-                setTimeout(() => alerta.remove(), 300);
-            }, 1500);
-        }
+        const priceRange = document.getElementById('priceRange');
+        const priceDisplay = document.getElementById('priceDisplay');
+
+        // Get query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const maxPrice = urlParams.get('price') || 1000; // Default to 1000 if price is not set
+
+        // Set the initial slider value and display
+        priceRange.value = maxPrice;
+        priceDisplay.textContent = `0€ - ${maxPrice}€`;
+
+        // Update displayed price range in real-time
+        priceRange.addEventListener('input', function () {
+            priceDisplay.textContent = `0€ - ${this.value}€`;
+        });
+
+        // Perform GET request when the slider stops moving
+        priceRange.addEventListener('change', function () {
+            const selectedPrice = this.value;
+
+            // Update or add the price parameter in the URL
+            urlParams.set('price', selectedPrice);
+            const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+            window.location.href = newUrl;
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
     });
+
 </script>
 
 <style>
+    html {
+        scroll-behavior: smooth;
+    }
     .filter-container {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
         padding: 1rem;
         max-width: 1800px;
-        margin: 0 auto;
+        margin: 0 auto 1rem;
+        margin-right: 2%;
     }
 
-    .sort-filter {
-        padding: 0.5rem 1rem;
-        border: 2px solid rgba(53, 161, 168, 0.5);
+    .filter-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        position: relative;
+    }
+
+    .price-filter {
+        flex-grow: 1;
+        max-width: 400px;
+    }
+
+    .filter-label {
+        font-weight: 500;
+        color: #35a1a8;
+        font-size: 0.9rem;
+    }
+
+    .price-range {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 2px;
+        background: #e0e0e0;
+        outline: none;
+        transition: opacity 0.2s;
+    }
+
+    .price-range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #35a1a8;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .price-range::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #35a1a8;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .price-range::-webkit-slider-thumb:hover,
+    .price-range::-moz-range-thumb:hover {
+        transform: scale(1.2);
+    }
+
+    .price-display {
+        min-width: 80px;
+        text-align: right;
+        font-weight: 500;
+        color: #35a1a8;
+        font-size: 0.9rem;
+    }
+
+    .filter-select {
+        appearance: none;
+        -webkit-appearance: none;
+        padding: 0.5rem 2rem 0.5rem 1rem;
+        border: 1px solid #e0e0e0;
         border-radius: 4px;
         background-color: white;
-        font-size: 1rem;
+        font-size: 0.9rem;
         color: #35a1a8;
         cursor: pointer;
         transition: all 0.3s ease;
     }
 
-    .sort-filter:hover {
-        border-color: rgba(53, 161, 168, 0.8);
-        box-shadow: 0 2px 4px rgba(53, 161, 168, 0.2);
+    .filter-icon {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+        width: 1.25rem;
+        height: 1.25rem;
+        color: #35a1a8;
     }
 
-    .sort-filter:focus {
-        outline: none;
+    .filter-select:hover, .filter-select:focus {
         border-color: #35a1a8;
-        box-shadow: 0 0 0 2px rgba(53, 161, 168, 0.2);
+        outline: none;
     }
 
+    @media (max-width: 768px) {
+        .filter-container {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .filter-wrapper, .price-filter {
+            width: 100%;
+            max-width: none;
+        }
+    }
     .container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
@@ -115,14 +240,15 @@
         margin: 0 auto;
         justify-items: center;
     }
+
     h2 {
         text-align: center;
         color: #808080;
     }
+
     .cont2 {
         display: flex;
         justify-content: center;
-        left: 50%;
         align-items: center;
         margin-top: 15%;
     }
@@ -144,7 +270,7 @@
         font-weight: 600;
         font-size: 1em;
         padding: 0.75em 1em;
-        color: rgb(53, 161, 168, 0.75);
+        color: rgba(53, 161, 168, 0.75);
         transition: 4s;
         margin: 0;
         position: relative;
@@ -179,6 +305,7 @@
         color: white;
         cursor: pointer;
     }
+
     .button.active {
         color: rgba(53, 161, 168, 1);
     }
@@ -190,6 +317,7 @@
         transform: none;
         background-color: rgba(53, 161, 168, 0.75);
     }
+
     .alerta {
         position: fixed;
         top: 2rem;
@@ -206,67 +334,18 @@
         z-index: 1000;
     }
 
-    .filter-container {
-        display: flex;
-        justify-content: flex-end;
-        padding: 1rem;
-        max-width: 1800px;
-        margin: 0 auto;
-        margin-right: 2%;
-    }
-
-    .filter-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        position: relative;
-    }
-
-    .sort-filter {
-        appearance: none;
-        -webkit-appearance: none;
-        padding: 0.5rem 2.5rem 0.5rem 1rem;
-        border: 2px solid rgba(53, 161, 168, 0.5);
-        border-radius: 4px;
-        background-color: white;
-        font-size: 1rem;
-        color: #35a1a8;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .filter-icon {
-        position: absolute;
-        right: 0.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        pointer-events: none;
-        width: 1.5rem;
-        height: 1.5rem;
-        color: #35a1a8;
-    }
-
-    .sort-filter:hover {
-        border-color: rgba(53, 161, 168, 0.8);
-        box-shadow: 0 2px 4px rgba(53, 161, 168, 0.2);
-    }
-
-    .sort-filter:focus {
-        outline: none;
-        border-color: #35a1a8;
-        box-shadow: 0 0 0 2px rgba(53, 161, 168, 0.2);
-    }
-
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
         .filter-container {
-            justify-content: center;
-            padding: 0.5rem;
+            flex-direction: column;
+            align-items: stretch;
         }
 
-        .sort-filter {
+        .filter-wrapper {
             width: 100%;
-            max-width: 300px;
+        }
+
+        .filter-select, .price-range {
+            width: 100%;
         }
     }
 </style>
-
