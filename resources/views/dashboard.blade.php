@@ -163,7 +163,7 @@
                                                     <input type="text" class="form-control" id="editForma" name="forma" required>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                                                     <button type="submit" class="btn btn-primary">Adicionar Medicamento</button>
                                                 </div>
                                             </form>

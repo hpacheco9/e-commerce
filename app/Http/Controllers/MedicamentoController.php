@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Medicamento;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class MedicamentoController extends Controller
 {
@@ -72,6 +73,21 @@ class MedicamentoController extends Controller
         ]);
 
         $medicamento = Medicamento::where('referencia', $request->referencia)->firstOrFail();
+
+        // Check for duplicates, excluding the current record
+        $existingMedicamento = Medicamento::where('nome', $request->nome)
+            ->where('industria', $request->industria)
+            ->where('forma', $request->forma)
+            ->where('dosagem', $request->dosagem)
+            ->where('referencia', '!=', $medicamento->referencia) // Exclude current record
+            ->exists();
+
+        if ($existingMedicamento) {
+            return redirect()->back()->withErrors([
+                'referencia' => 'Já existe um medicamento com esta combinação de nome, indústria, forma e dosagem'
+            ]);
+        }
+
         $medicamento->nome = $request->input('nome');
         $medicamento->quantidade = $request->input('quantidade');
         $medicamento->industria = $request->input('industria');
@@ -91,6 +107,18 @@ class MedicamentoController extends Controller
         ], [
             'referencia.unique' => 'Já existe um medicamento com esta referencia'
         ]);
+
+        $existingMedicamento = Medicamento::where('nome', $request->nome)
+            ->where('industria', $request->industria)
+            ->where('forma', $request->forma)
+            ->where('dosagem', $request->dosagem)
+            ->exists();
+
+        if ($existingMedicamento) {
+            return redirect()->back()->withErrors([
+                'referencia' => 'Já existe um medicamento com esta combinação de nome, indústria, forma e dosagem'
+            ]);
+        }
 
         $medicamento = new Medicamento();
         $medicamento->referencia = $request->referencia;
