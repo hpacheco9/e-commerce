@@ -20,7 +20,8 @@
                     <div class="user-dropdown">
                         <button class="user-name" onclick="toggleDropdown()" aria-haspopup="true" aria-expanded="false">
                             @if(Auth::user()->image)
-                                <img src="images/user_images/{{ Auth::user()->image }}" alt="User Image" class="user-avatar">
+                                <img src="{{ asset('images/user_images/' . Auth::user()->image) }}" alt="User Image" class="user-avatar">
+
                                 {{ Auth::user()->name }}
                             @endif
                         </button>
@@ -31,7 +32,8 @@
                     </div>
                 </nav>
                     <a href="/carrinho" class="cart-link">
-                       <img src="images/shopping-cart.png" width="25px">
+                        <img src="{{ asset('images/shopping-cart.png') }}" width="25px">
+
                     </a>
             @endauth
 

@@ -5,15 +5,15 @@
 @section('content')
     <div class="filter-container">
         <div class="filter-wrapper">
-            <label for="priceRange" class="filter-label">Preço:</label>
+            <label for="priceRange" class="filter-label">Preço</label>
             <input type="range" id="priceRange" class="price-range" min="0" max="{{ $preco ?? '1000'}} " step="1" value="1000">
             <span id="priceDisplay" class="price-display">0€ - 1000€</span>
         </div>
         <div class="filter-wrapper">
             <select id="sortFilter" class="filter-select">
                 <option value="">Ordenar por</option>
-                <option value="price_asc">Preço: Menor para Maior</option>
-                <option value="price_desc">Preço: Maior para Menor</option>
+                <option value="price_asc">Preço mais baixo</option>
+                <option value="price_desc">Preço mais alto</option>
                 <option value="name_asc">Nome: A-Z</option>
                 <option value="name_desc">Nome: Z-A</option>
             </select>
@@ -74,41 +74,19 @@
         const priceRange = document.getElementById('priceRange');
         const priceDisplay = document.getElementById('priceDisplay');
 
-        // Get query parameters
         const urlParams = new URLSearchParams(window.location.search);
-        const maxPrice = urlParams.get('price') || 1000; // Default to 1000 if price is not set
-
-        // Set the initial slider value and display
+        const maxPrice = urlParams.get('price') || 1000;
         priceRange.value = maxPrice;
         priceDisplay.textContent = `0€ - ${maxPrice}€`;
-
-        // Update displayed price range in real-time
         priceRange.addEventListener('input', function () {
             priceDisplay.textContent = `0€ - ${this.value}€`;
         });
 
-        // Perform GET request when the slider stops moving
         priceRange.addEventListener('change', function () {
             const selectedPrice = this.value;
-
-            // Update or add the price parameter in the URL
             urlParams.set('price', selectedPrice);
             const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
             window.location.href = newUrl;
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
         });
 
     });

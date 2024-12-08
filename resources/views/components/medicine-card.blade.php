@@ -181,7 +181,7 @@
     }
 
     .price-unit.in-stock {
-        color: #00FF00;
+        color: #149FA8;
         margin-left: 29.99%;
     }
 
