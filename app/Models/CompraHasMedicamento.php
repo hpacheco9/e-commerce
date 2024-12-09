@@ -9,7 +9,7 @@ class CompraHasMedicamento extends Model
 {
     use HasFactory;
 
-    protected $table = 'compra_has_medicamentos';
+    protected $table = 'compras_has_medicamentos';
 
     /**
      * The attributes that are mass assignable.

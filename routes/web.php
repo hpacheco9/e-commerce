@@ -59,8 +59,8 @@ Route::post('carrinho/{referencia}', [CarrinhoController::class, 'add'])
 
 Route::get('/carrinho/addOrCreate', [CarrinhoHasMedicamentosController::class, 'addOrCreate'])->name('carrinho.addOrCreate')->middleware('auth');
 
-Route::post('/cart/update', [CarrinhoHasMedicamentosController::class, 'updateQuantity'])->name('cart.update')->middleware('auth');
-Route::post('/cart/remove', [CarrinhoHasMedicamentosController::class, 'removeItem'])->name('cart.remove')->middleware('auth');
+Route::post('/cart/update', [CarrinhoHasMedicamentosController::class, 'updateQuantity'])->name('carrinho.update')->middleware('auth');
+Route::post('/cart/remove', [CarrinhoHasMedicamentosController::class, 'removeItem'])->name('carrinho.remove')->middleware('auth');
 
 // Checkout
 

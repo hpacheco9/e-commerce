@@ -11,7 +11,7 @@ class CarrinhoHasMedicamento extends Model
 
 {
     use HasFactory;
-    protected $table = 'carrinho_has_medicamentos';
+    protected $table = 'carrinhos_has_medicamentos';
 
     /**
      * The attributes that are mass assignable.
@@ -46,7 +46,7 @@ class CarrinhoHasMedicamento extends Model
 
         if ($record) {
 
-            DB::table('carrinho_has_medicamentos')
+            DB::table('carrinhos_has_medicamentos')
                 ->where('user_email', $userEmail)
                 ->where('medicamento_referencia', $medicamentoReferencia)
                 ->update(['quantidade' => $quantidade]);
@@ -62,7 +62,7 @@ class CarrinhoHasMedicamento extends Model
 
     public static function deleteByCompositeKey($userEmail, $medicamentoReferencia)
     {
-        DB::table('carrinho_has_medicamentos')
+        DB::table('carrinhos_has_medicamentos')
             ->where('user_email', $userEmail)
             ->where('medicamento_referencia', $medicamentoReferencia)
             ->delete();

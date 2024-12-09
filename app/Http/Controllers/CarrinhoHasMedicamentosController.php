@@ -6,7 +6,7 @@ use App\Models\CarrinhoHasMedicamento;
 use App\Models\Medicamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function Laravel\Prompts\error;
+
 
 class CarrinhoHasMedicamentosController extends Controller
 {

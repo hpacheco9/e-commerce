@@ -23,7 +23,7 @@
                             <div class="row"></div>
                         </div>
                         <div class="col">
-                            <form action={{route("cart.update")}} method="POST" class="d-flex align-items-center">
+                            <form action={{route("carrinho.update")}} method="POST" class="d-flex align-items-center">
                                 @csrf
                                 <input type="hidden" name="medicamento_referencia" value="{{ $item['medicamento']->referencia }}">
 
@@ -39,7 +39,7 @@
                                 </button>
                             </form>
                         </div>
-                        <form action={{route("cart.remove")}} method="POST" class="col">
+                        <form action={{route("carrinho.remove")}} method="POST" class="col">
                             <input type="hidden" name="medicamento_referencia" value="{{ $item['medicamento']->referencia }}">
                             @csrf &euro; {{$item['quantidade'] * $item['medicamento']->preco}}
                             <button type="submit" class="close">&#10005;</button>
@@ -75,7 +75,11 @@
                 <div class="col">TOTAL</div>
                 <div class="col text-right">&euro; {{$total + 5}}</div>
             </div>
-            <a href="checkout" class="btn">CHECKOUT</a>
+            @if(count($items) != 0)
+                <a href="checkout" class="btn">CHECKOUT</a>
+            @else
+                <h1 class="btn" style="text-transform: uppercase">Adicione items ao carrinho</h1>
+            @endif
         </div>
     </div>
 </div>
