@@ -74,7 +74,12 @@
                     <span>Total a pagar</span>
                     <span>€ {{ $total }}</span>
                 </div>
-                <button class="btn">Efetuar Pagamento</button>
+                <form action="{{ route('compra.pagamento') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="total" value="{{ $total }}">
+                    <input type="hidden" name="items" value="{{ json_encode($items) }}">
+                    <button class="btn" type="submit">Efetuar Pagamento</button>
+                </form>
             </div>
         </div>
     </div>

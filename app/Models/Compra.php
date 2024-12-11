@@ -14,9 +14,10 @@ class Compra extends Model
     protected $fillable = [
         'user_email',
         'total',
-        'created_at',
-        'updated_at',
+        'data',
     ];
+
+    public $timestamps = false;
 
     public $incrementing = true;
 

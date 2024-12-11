@@ -4,6 +4,8 @@ use App\Http\Controllers\CarrinhoHasMedicamentosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedicamentoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\CompraHasMedicamentosController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Middleware\IsAdmin;
 
@@ -67,6 +69,12 @@ Route::post('/cart/remove', [CarrinhoHasMedicamentosController::class, 'removeIt
 Route::get('checkout', function () {
     return (new CarrinhoHasMedicamentosController)->index('checkout');
 })->middleware('auth')->name('checkout.index');
+
+Route::post('pagamento', [CompraController::class, 'pagamento'])->middleware('auth')->name('compra.pagamento')->middleware('auth');
+
+Route::get('/compra/addOrCreate', [CompraHasMedicamentosController::class, 'addOrCreate'])->name('compra.addOrCreate')->middleware('auth');
+
+
 
 // Perfil
 

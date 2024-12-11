@@ -9,7 +9,7 @@ class CompraHasMedicamento extends Model
 {
     use HasFactory;
 
-    protected $table = 'compras_has_medicamentos';
+    protected $table = 'compras_has_medicamento';
 
     /**
      * The attributes that are mass assignable.
@@ -25,4 +25,14 @@ class CompraHasMedicamento extends Model
     public $incrementing = false;
     public $timestamps = false;
     protected $keyType = 'string';
+
+    public static function createByCompositeKey($referencia, $quantidade, $compraId)
+    {
+        $compraHasMedicamento = new CompraHasMedicamento();
+        $compraHasMedicamento->compra_id = $compraId;
+        $compraHasMedicamento->medicamento_referencia = $referencia;
+        $compraHasMedicamento->quantidade = $quantidade;
+
+        return $compraHasMedicamento->save();
+    }
 }
