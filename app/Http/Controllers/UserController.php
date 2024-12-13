@@ -57,7 +57,7 @@ class UserController extends Controller
 
             $incoming['password'] = Hash::make($incoming['password']);
             User::create($incoming);
-            return redirect("/login")->with('success', 'Account created successfully');
+            return redirect("/login")->with('success', 'Conta criada com sucesso!');
         } catch (\Exception $e) {
 
             return back()->withErrors([
@@ -90,7 +90,7 @@ class UserController extends Controller
         $this->removerPhoto();
         $this->user->image = 'default.png';
         $this->user->save();
-        return redirect()->back()->with('success', 'Profile picture deleted successfully!');
+        return redirect()->back()->with('success', 'Foto de perfil removida com sucesso!');
     }
     public function update(Request $request)
     {
@@ -122,7 +122,7 @@ class UserController extends Controller
                     $this->user->image = $filename;
                 }
             } catch (\Exception $e) {
-                return back()->with('error', 'File upload failed: ' . $e->getMessage());
+                return back()->with('error', 'Falha no upload do ficheiro : ' . $e->getMessage());
             }
 
         }
@@ -133,7 +133,7 @@ class UserController extends Controller
         $this->user->porta = $validated['porta'] ?? $this->user->porta;
         $this->user->save();
 
-        return redirect()->back()->with('success', 'Profile updated successfully!');
+        return redirect()->back()->with('success', 'Perfil atualizado com sucesso!');
     }
 
     public function logout(Request $request)
