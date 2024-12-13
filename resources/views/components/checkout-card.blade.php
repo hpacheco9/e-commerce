@@ -78,7 +78,7 @@
                     @csrf
                     <input type="hidden" name="total" value="{{ $total }}">
                     <input type="hidden" name="items" value="{{ json_encode($items) }}">
-                    <button class="btn" type="submit">Efetuar Pagamento</button>
+                    <button class="btn" type="submit" @if(count($items) == 0) disabled @endif>Efetuar Pagamento</button>
                 </form>
             </div>
         </div>
@@ -239,6 +239,16 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
         transition: background-color 0.3s ease;
+    }
+    .btn:disabled {
+        background-color: #ccc;
+        color: #666;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+
+    .btn:disabled:hover {
+        background-color: #ccc;
     }
 
     .btn:hover {

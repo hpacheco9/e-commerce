@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrinho;
+use App\Models\CarrinhoHasMedicamento;
 use App\Models\Compra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +27,9 @@ class CompraController extends Controller
                 'data' => $data,
                 'user_email' => $userEmail,
             ]);
+
+            CarrinhoHasMedicamento::where('user_email', $userEmail)->delete();
+
 
             return redirect()->route('compra.addOrCreate', [
                 'user_email' => $userEmail,

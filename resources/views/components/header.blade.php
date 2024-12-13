@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </nav>
-                    <a href="/carrinho" class="cart-link">
+                    <a href="{{ route('carrinho.index') }}" class="cart-link">
                         <img src="{{ asset('images/shopping-cart.png') }}" width="25px">
 
                     </a>

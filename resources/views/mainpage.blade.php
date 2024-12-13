@@ -9,23 +9,6 @@
             <input type="range" id="priceRange" class="price-range" min="0" max="{{ $preco ?? '1000'}} " step="1" value="1000">
             <span id="priceDisplay" class="price-display">0€ - 1000€</span>
         </div>
-        <div class="filter-wrapper">
-            <select id="sortFilter" class="filter-select">
-                <option value="">Ordenar por</option>
-                <option value="price_asc">Preço mais baixo</option>
-                <option value="price_desc">Preço mais alto</option>
-                <option value="name_asc">Nome: A-Z</option>
-                <option value="name_desc">Nome: Z-A</option>
-            </select>
-            <div class="filter-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="4" y1="12" x2="20" y2="12"></line>
-                    <line x1="4" y1="6" x2="20" y2="6"></line>
-                    <line x1="4" y1="18" x2="20" y2="18"></line>
-                </svg>
-            </div>
-        </div>
-
     </div>
 
     @if(count($medicamentos) > 0)
@@ -89,6 +72,17 @@
             window.location.href = newUrl;
         });
 
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const alerta = document.getElementById("alerta");
+        if (alerta) {
+            setTimeout(() => {
+                alerta.style.opacity = '0';
+                alerta.style.transform = 'translateY(-20px)';
+                setTimeout(() => alerta.remove(), 300);
+            }, 1500);
+        }
     });
 
 </script>

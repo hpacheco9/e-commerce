@@ -11,7 +11,6 @@ use App\Http\Middleware\IsAdmin;
 
 // Página inicial
 
-
 Route::get('/', function () {
     return (new MedicamentoController)->index(request(), 10, 'mainpage');
 });

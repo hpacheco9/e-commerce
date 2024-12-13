@@ -133,7 +133,6 @@ class UserController extends Controller
         $this->user->porta = $validated['porta'] ?? $this->user->porta;
         $this->user->save();
 
-
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 
