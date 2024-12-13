@@ -73,6 +73,11 @@ Route::post('pagamento', [CompraController::class, 'pagamento'])->middleware('au
 
 Route::get('/compra/addOrCreate', [CompraHasMedicamentosController::class, 'addOrCreate'])->name('compra.addOrCreate')->middleware('auth');
 
+// Status
+
+Route::get('status', function () {
+    return view('status');
+})->middleware('auth')->name('status');
 
 
 // Perfil

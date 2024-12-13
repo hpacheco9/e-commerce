@@ -9,25 +9,23 @@ class CompraHasMedicamentosController extends Controller
 {
     public function addOrCreate(Request $request)
     {
-        $userEmail = $request['user_email'];
         $items = json_decode($request['items']);
-        $data = $request['data'];
         $compraId = $request['compra_id'];
 
-
-
+        $validate = null;
         foreach ($items as $item) {
             $validate = CompraHasMedicamento::createByCompositeKey(
                 $item->medicamento->referencia,
                 $item->quantidade,
                 $compraId
             );
+            MedicamentoController::updateStock($item->medicamento->referencia, $item->quantidade);
         }
 
         if (!$validate) {
-            return view('status')->with('error', 'Quantidade indisponível');
+            return redirect('status')->with('error', 'Erro ao realizar compra');
         }
 
-        return view('status')->with('success', 'Item adicionado ao carrinho com sucesso');
+        return redirect('status')->with('success', 'Compra realizada com sucesso');
     }
 }

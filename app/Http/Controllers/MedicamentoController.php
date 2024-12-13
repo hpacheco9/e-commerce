@@ -8,6 +8,13 @@ use Illuminate\Validation\Rule;
 
 class MedicamentoController extends Controller
 {
+    public static function updateStock($referencia, $quantidade)
+    {
+        $medicamento = Medicamento::where('referencia', $referencia)->firstOrFail();
+        $medicamento->quantidade -= $quantidade;
+        $medicamento->save();
+    }
+
     public function index(Request $request, $limit = 10, $view = 'mainpage')
     {
         $page = max(1, $request->input('page', 1));

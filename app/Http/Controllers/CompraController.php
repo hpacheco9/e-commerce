@@ -12,31 +12,21 @@ class CompraController extends Controller
 {
     public function pagamento(Request $request)
     {
-        $data = date('Y-m-d H:i:s');
         $userEmail = Auth::user()->email;
         $total = $request->input('total');
         $produtos = $request->input('items');
 
+        $compra = Compra::create([
+            'total' => $total,
+            'data' => now(),
+            'user_email' => $userEmail,
+        ]);
 
-        $compra = Compra::where('user_email', $userEmail)->where('data', $data)->first();
-        if ($compra) {
-            return redirect()->route('compra.index')->with('error', 'Compra já realizada hoje');
-        } else {
-            $compra = Compra::create([
-                'total' => $total,
-                'data' => $data,
-                'user_email' => $userEmail,
-            ]);
+        CarrinhoHasMedicamento::where('user_email', $userEmail)->delete();
 
-            CarrinhoHasMedicamento::where('user_email', $userEmail)->delete();
-
-
-            return redirect()->route('compra.addOrCreate', [
-                'user_email' => $userEmail,
-                'items' => $produtos,
-                'data' => $data,
-                'compra_id' => $compra->id
-            ]);
-        }
+        return redirect()->route('compra.addOrCreate', [
+            'items' => $produtos,
+            'compra_id' => $compra->id,
+        ]);
     }
 }
