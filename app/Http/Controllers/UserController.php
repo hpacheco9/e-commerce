@@ -57,7 +57,7 @@ class UserController extends Controller
 
             $incoming['password'] = Hash::make($incoming['password']);
             User::create($incoming);
-            return redirect("/login")->with('success', 'Conta criada com sucesso!');
+            return redirect("auth/login")->with('success', 'Conta criada com sucesso!');
         } catch (\Exception $e) {
 
             return back()->withErrors([

@@ -164,7 +164,7 @@
     </div>
     <div class="right-column">
         <h2>Registar</h2>
-        <form method="post" action="/register">
+        <form method="post" action="/auth/register">
             {{ csrf_field() }}
 
             <div class="input-group">
@@ -226,7 +226,7 @@
 
             <button type="submit">Criar</button>
         </form>
-        <p id="have-account">Já tens uma conta? <a href="/login">Login</a></p>
+        <p id="have-account">Já tens uma conta? <a href="/auth/login">Login</a></p>
     </div>
 </div>
 </body>

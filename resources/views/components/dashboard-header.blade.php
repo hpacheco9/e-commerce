@@ -20,7 +20,7 @@
                 </button>
                 <div class="dropdown-content" id="userDropdown">
                     <a href="/perfil">Perfil</a>
-                    <a href="/logout">Logout</a>
+                    <a href="/auth/logout">Logout</a>
                 </div>
             </div>
         </nav>

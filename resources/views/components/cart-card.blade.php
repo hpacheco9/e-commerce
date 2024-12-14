@@ -23,7 +23,7 @@
                             <div class="row"></div>
                         </div>
                         <div class="col">
-                            <form action={{route("carrinho.update")}} method="POST" class="d-flex align-items-center">
+                            <form action="{{ route('carrinho.update') }}" method="POST" class="d-flex align-items-center">
                                 @csrf
                                 <input type="hidden" name="medicamento_referencia" value="{{ $item['medicamento']->referencia }}">
 
@@ -38,6 +38,7 @@
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </form>
+
                         </div>
                         <form action={{route("carrinho.remove")}} method="POST" class="col">
                             <input type="hidden" name="medicamento_referencia" value="{{ $item['medicamento']->referencia }}">
@@ -98,9 +99,9 @@
                     input.closest('form').submit();
                 }
             });
-
         });
     });
+
 
     document.addEventListener("DOMContentLoaded", function () {
         const alerta = document.getElementById("alerta");

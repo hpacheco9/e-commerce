@@ -206,7 +206,7 @@
             </div>
             <button type="submit">Enviar</button>
         </form>
-        <p id="no-account">Já tens conta? <a href="/login">Login</a></p>
+        <p id="no-account">Já tens conta? <a href="/auth/login">Login</a></p>
     </div>
 </div>
 </body>

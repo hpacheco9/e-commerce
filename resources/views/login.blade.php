@@ -195,7 +195,7 @@
     </div>
     <div class="right-column">
         <h2>Login</h2>
-        <form method="post" action="/login">
+        <form method="post" action="/auth/login">
             {{ csrf_field()  }}
             <div class="input-group">
                 <label for="email">Email</label>
@@ -224,11 +224,11 @@
                     }
                     ?>
                 </div>
-                <p id="forgot"><a href="/forgot">Esqueceu-se da password?</a></p>
+                <p id="forgot"><a href="/password/forgot">Esqueceu-se da password?</a></p>
             </div>
             <button type="submit">Entrar</button>
         </form>
-        <p id="no-account">Não tens uma conta? <a href="/register">Criar</a></p>
+        <p id="no-account">Não tens uma conta? <a href="register">Criar</a></p>
     </div>
 </div>
 </body>

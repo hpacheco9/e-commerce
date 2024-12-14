@@ -20,6 +20,7 @@ class CarrinhoHasMedicamentosController extends Controller
         $quantidade = $request['quantidade'];
 
 
+
         $validate = CarrinhoHasMedicamento::updateOrCreateByCompositeKey(
             $userEmail,
             $referencia,
@@ -35,9 +36,10 @@ class CarrinhoHasMedicamentosController extends Controller
 
     public function updateQuantity(Request $request)
     {
-        $action = $request->input('action');
+
         $referencia = $request->input('medicamento_referencia');
         $quantidade = $request->input('quantidade');
+        $action = $request->input('action');
 
         $quantidadeCarrinho = $quantidade;
 

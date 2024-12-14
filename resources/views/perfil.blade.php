@@ -384,7 +384,7 @@
                         <a href="/" class="nav-button" title="Home">
                             Home
                         </a>
-                        <a href="/logout" class="nav-button logout-button" title="Logout">
+                        <a href="/auth/logout" class="nav-button logout-button" title="Logout">
                             Logout
                         </a>
                     </div>
