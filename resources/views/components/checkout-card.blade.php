@@ -88,9 +88,14 @@
 <script>
     window.addEventListener('pageshow', function(event) {
         if (event.persisted) {
-            window.location.reload();
+            window.location.reload(true);
+        } else if (performance.getEntriesByType("navigation")[0].type === "back_forward") {
+            window.location.reload(true);
         }
     });
+
+
+
 </script>
 
 
